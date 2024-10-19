@@ -38,27 +38,26 @@ function Login({ setPopup }) {
 				body: JSON.stringify(LoginInfo),
 			});
 			const result = await response.json();
-			const { success, message, jwtToken, name, error } = result;
+			const { success, message, jwtToken, name, email, error } = result;
+			console.log(email);
 			if (success) {
 				handleSuccess(message);
 				localStorage.setItem("token", jwtToken);
 				localStorage.setItem("loggedInUser", name);
+				localStorage.setItem("loggedInUserEmail", email);
+				// console.log("loggedInUser");
 				setTimeout(() => {
 					setPopup(null);
 					navigate("/home");
 				}, 1000);
-			} else if (error) {
-				const details = error.details[0].message;
-				handleError(details);
-			} else if (!success) {
-				handleError(message);
+			} else {
+				handleError(message || error.details[0].message);
 			}
-			// console.log(result);
 		} catch (err) {
 			handleError(err);
 		}
 	};
-	const handlePopup = (e) => {
+	const handlePopup = () => {
 		setPopup(null);
 	};
 	return (

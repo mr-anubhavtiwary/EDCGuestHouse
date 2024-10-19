@@ -21,9 +21,10 @@ function Home() {
 	// const [products, setProducts] = useState("");
 
 	const navigate = useNavigate();
-	const handleLogout = (e) => {
+	const handleLogout = () => {
 		localStorage.removeItem("token");
 		localStorage.removeItem("loggedInUser");
+		localStorage.removeItem("loggedInUserEmail");
 		setLoggedInUser(false);
 		handleSuccess("User logged out");
 		setTimeout(() => {
@@ -31,27 +32,30 @@ function Home() {
 		}, 1000);
 	};
 
-	const handleLogin = (e) => {
+	const handleLogin = () => {
 		setPopup(1);
-		// navigate("/login");
 	};
 
-	const handleSignup = (e) => {
+	const handleSignup = () => {
 		setPopup(2);
-		// navigate("/signup");
 	};
 
-	const handleApplication = (e) => {
+	const handleApplication = () => {
 		if (loggedInUser) {
-			navigate("/application");
+			navigate("/application", {
+				state: {
+				  loggedInUser,
+				  loggedInUserEmail: localStorage.getItem("loggedInUserEmail"),
+				},
+			  });
 		} else {
 			setPopup(1);
 		}
 	};
-
+	console.log(localStorage.getItem("loggedInUserEmail"));
 	useEffect(() => {
 		setLoggedInUser(localStorage.getItem("loggedInUser"));
-	}, []);
+	}, [popup]);
 
 	// const fetchProducts = async () => {
 	// 	try {

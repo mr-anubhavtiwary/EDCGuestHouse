@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import "../assets/stylesheets/Signup.css";
 import { handleError, handleSuccess } from "../utils";
@@ -46,18 +46,14 @@ function Signup({ setPopup }) {
 					setPopup(null);
 					navigate("/home");
 				}, 1000);
-			}else if(error){
-                const details = error.details[0].message;
-                handleError(details);
-            }else if(!success){
-                handleError(message);
-            }
-			// console.log(result);
+			} else {
+				handleError(message || error.details[0].message);
+			}
 		} catch (err) {
 			handleError(err);
 		}
 	};
-	const handlePopup = (e) => {
+	const handlePopup = () => {
 		setPopup(null);
 	};
 	return (
@@ -98,7 +94,9 @@ function Signup({ setPopup }) {
 						value={SignupInfo.password}
 					/>
 				</div>
-				<button className="signup" type='submit'>Signup</button>
+				<button className='signup' type='submit'>
+					Signup
+				</button>
 			</form>
 			<ToastContainer />
 		</div>
