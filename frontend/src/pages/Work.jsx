@@ -1,36 +1,83 @@
 import React, { useEffect, useRef, useState } from "react";
 import mnnit2 from "../assets/images/mnnit2.png";
+import speech from "../assets/images/speech.png";
+import wifi from "../assets/images/wifi.png";
+import cutlery from "../assets/images/cutlery.png";
+import party from "../assets/images/party.png";
+import doctor from "../assets/images/doctor.png";
+import laundry from "../assets/images/laundry.png";
+import parking from "../assets/images/parking.png";
+import helpdesk from "../assets/images/helpdesk.png";
+import washroom from "../assets/images/washroom.png";
+import vip from "../assets/images/vip.png";
+import ac from "../assets/images/ac.png";
+import water from "../assets/images/water.png";
+import internet from "../assets/images/internet.png";
+import television from "../assets/images/television.png";
 
 const Work = () => {
 	const scrollRef = useRef(null);
+	const [scroll, setScroll] = useState(0);
 
 	const workInfoData = [
 		{
-			// image: mnnit2,
-			title: "AC Rooms",
-			text: "Lorem ipsum dolor sit amet consectetur. Maecenas orci et sagittis duis elementum interdum facilisi bibendum.",
-		},
-		{
-			image: mnnit2,
+			image: speech,
 			title: "Conference Hall",
-			text: "Lorem ipsum dolor sit amet consectetur. Maecenas orci et ",
 		},
 		{
+			image: wifi,
 			title: "Free Wi-fi",
-			text: "Lorem ipsum dolor sit amet consectetur. Maecenas orci et lorem ipsum",
 		},
 		{
+			image: cutlery,
 			title: "Restaurant",
-			text: "Lorem ipsum dolor sit amet consectetur. Maecenas orci et lorem ipsum",
 		},
 		{
+			image: party,
 			title: "Party Hall",
-			text: "Lorem ipsum dolor sit amet consectetur. Maecenas orci et lorem ipsum",
 		},
 		{
-			title: "Doctor on Call",
-			text: "Lorem ipsum dolor sit amet consectetur. Maecenas orci et lorem ipsum",
+			image: television,
+			title: "23 inch TV",
+			// text: "Lorem ipsum dolor sit amet consectetur. Maecenas orci et sagittis duis elementum interdum facilisi bibendum.",
 		},
+		{
+			image: doctor,
+			title: "Doctor on Call",
+		},
+		{
+			image: laundry,
+			title: "Laundry",
+		},
+		{
+			image: parking,
+			title: "Car Parking",
+		},
+		{
+			image: helpdesk,
+			title: "24x7 Help Desk",
+		},
+		{
+			image: washroom,
+			title: "Hygenic Washroom",
+		},
+		{
+			image: vip,
+			title: "VIP Suites",
+		},
+		{
+			image: ac,
+			title: "AC Suites",
+		},
+		{
+			image: water,
+			title: "Mineral Water",
+		},
+		{
+			image: internet,
+			title: "Dataport",
+		},
+		
 	];
 
 	useEffect(() => {
@@ -42,11 +89,17 @@ const Work = () => {
 					scrollContainer;
 
 				// Scroll by 1 pixel
-				scrollContainer.scrollLeft += 1;
+				if(scroll === 1){
+					scrollContainer.scrollLeft -= 1;
+				} else {
+					scrollContainer.scrollLeft += 1;
+				}
 
 				// If at the bottom, reset scroll to the top
-				if (scrollLeft + clientWidth >= scrollWidth) {
-					scrollContainer.scrollLeft = 0;
+				if (scrollLeft  + clientWidth >= scrollWidth) {
+					setScroll(1);
+				} else if(scrollLeft <= 0){
+					setScroll(0);
 				}
 			}
 		};
@@ -55,7 +108,7 @@ const Work = () => {
 
 		// Cleanup interval on component unmount
 		return () => clearInterval(intervalId);
-	}, []);
+	}, [scroll]);
 
 	return (
 		<div className='work-section-wrapper'>
@@ -83,7 +136,6 @@ const Work = () => {
 							<img src={data.image} alt={data.title} />
 						</div>
 						<h2>{data.title}</h2>
-						{/* <p>{data.text}</p> */}
 					</div>
 				))}
 			</div>

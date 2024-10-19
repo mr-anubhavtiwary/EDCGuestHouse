@@ -157,98 +157,113 @@ nav {
 	margin-top: 2rem;
 	display: flex;
 }
-.contact-page-wrapper {
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	flex-direction: column;
-	margin: 6rem 0rem;
-}
-.contact-form-container {
-	background-color: white;
-	max-width: 700px;
-	width: 100%;
-	margin-top: 3rem;
-	display: flex;
-	align-items: center;
-	padding: 1rem;
-	border-radius: 5rem;
-}
-.contact-form-container input {
-	flex: 1;
-	height: 100%;
-	border: none;
-	outline: none;
-	font-size: 1.3rem;
-	padding: 0.5rem 1rem;
-}
+
 .footer-wrapper {
-	margin: 6rem 0rem;
+	/* margin: 6rem 0rem;
 	display: flex;
-	margin-top: 10rem;
+	margin-top: 10rem; */
+	margin: 6rem 0 2rem 0; /* Adjust top and bottom margins */
+	padding-bottom: 2rem; /* Add padding at the bottom */
+	display: flex;
+	flex-direction: column;
+	align-items: center; /* Center content */
+	width: 100%; /* Ensure it spans full width */
+	background-color: #f9f9f9; /* Optional: Add a light background */
 }
 .footer-logo-container {
-	max-width: 110px;
+	max-width: 120px;
 }
 .footer-icons {
 	margin-top: 2.5rem;
+	display: flex;
+	gap: 1rem;
 }
 .footer-icons svg {
 	font-size: 1.5rem;
-	margin-right: 1.25rem;
 	color: #585858;
+	cursor: pointer;
+	transition: color 0.3s ease;
 }
-/* .footer-section-one {
-	border: 2px solid blue;
-  } */
-.footer-section-two {
-	flex: 1;
+.footer-icons svg:hover {
+	color: #0dd2fe; /* Add a hover effect for icons */
+}
+.footer-section-one {
 	display: flex;
-	justify-content: flex-end;
+	justify-content: space-between;
+	align-items: center;
+	width: 100%;
+	max-width: 1200px; /* Limit the max width to avoid stretching */
+	padding: 1rem 2rem;
+}
+.footer-section-two {
+	display: flex;
+	justify-content: space-around;
+	align-items: flex-start;
+	width: 100%;
+	max-width: 1200px; /* Consistent max width */
+	flex-wrap: wrap; /* Make it responsive */
+	padding: 1rem 2rem;
+	margin-top: 2rem;
 }
 .footer-section-columns {
 	display: flex;
 	flex-direction: column;
+	margin: 1rem 0;
 	min-width: 190px;
 }
 .footer-section-columns span {
-	margin: 0.25rem 0rem;
+	margin: 0.25rem 0;
 	font-weight: 600;
 	color: #4c4c4c;
 	cursor: pointer;
+	transition: color 0.3s ease;
+}
+.footer-section-columns span:hover {
+	color: #0dd2fe; /* Hover effect for text */
 }
 .testimonial-section-bottom {
-	margin-top: 2rem;
 	background-color: white;
+	height: 400px;
 	padding: 1.5rem 2rem;
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	max-width: 750px;
+	max-width: 750px; /* Adjust max width of each card */
 	border-radius: 2rem;
 	flex-direction: column;
 	text-align: center;
-}
-.testimonial-section-bottom {
-	margin: 2rem auto;
+	margin: 2rem;
 }
 .testimonial-section-bottom p {
 	font-weight: 700;
+	height: 50px;
 	color: #515151;
 	max-width: 500px;
-	font-size: 1.1rem;
+	font-size: 0.8rem;
 	margin: 2rem 0rem;
 }
 .testimonials-stars-container svg {
 	margin: 0rem 0.25rem;
 	font-size: 1.5rem;
-	color: #fe9e0d;
+	color: #0dd2fe;
 }
 .testimonial-section-bottom h2 {
 	margin-top: 1.5rem;
 }
+.testimonial-section-bottom-container {
+	margin-top: 50px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	padding: 10px;
+	position: relative;
+	overflow: hidden;
+}
+
 .work-section-wrapper {
 	margin-top: 15rem;
+	width: 100%;
+	overflow: hidden;
 }
 .work-section-top p {
 	text-align: center;
@@ -264,11 +279,11 @@ nav {
 	flex-direction: column;
 }
 .work-section-info {
-	flex: 1 1 calc(33.333% - 20px);
+	flex: 0 0 250px;
 	width: 295px;
 	min-height: 350px;
 	background-color: white;
-	padding: 1rem 2rem;
+	padding: 16px;
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
@@ -277,26 +292,22 @@ nav {
 	text-align: center;
 	border-radius: 1rem;
 	color: #505050;
-	margin: 1rem 2rem;
+	margin: 20px;
 }
 .work-section-info h2 {
-	margin: 1rem 0rem;
+	margin: 15px;
 }
 .work-section-bottom {
-	margin-top: 5rem;
+	margin-top: 50px;
 	display: flex;
-	justify-content: center;
+	justify-content: flex-start;
 	align-items: center;
-	/* flex-wrap: wrap; */
 	white-space: nowrap;
-	overflow-x: auto;
-	gap: 15px;
+	overflow-x: scroll;
+	padding: 10px 0;
 }
 .work-section-info p {
 	width: 100%;
-	flex: 1;
-	display: flex;
-	align-items: center;
 	font-weight: 600;
 }
 
@@ -368,14 +379,6 @@ nav {
 	.primary-subheading {
 		text-align: center;
 	}
-	.watch-video-button {
-		margin-left: 0rem !important;
-		margin-top: 1rem;
-		font-size: 1rem !important;
-	}
-	.watch-video-button svg {
-		margin-right: 0.5rem !important;
-	}
 	.about-section-image-container {
 		margin-right: 0rem !important;
 	}
@@ -384,20 +387,6 @@ nav {
 	}
 	.work-section-bottom {
 		margin-top: 1rem !important;
-	}
-	.contact-form-container {
-		padding: 0.5rem !important;
-		flex-direction: column;
-		justify-content: center;
-		align-items: center;
-		border-radius: 1rem !important;
-	}
-	.contact-form-container input {
-		font-size: 1rem !important;
-		max-width: 100%;
-		padding: 0.5rem 1rem !important;
-		margin-bottom: 0.8rem !important;
-		text-align: center;
 	}
 	.footer-wrapper {
 		flex-direction: column;
@@ -422,6 +411,15 @@ nav {
 /* Hide scrollbar for Chrome, Safari, and Edge */
 .work-section-bottom::-webkit-scrollbar {
 	display: none;
+}
+@media (max-width: 768px) {
+	.testimonial-section-bottom-container {
+		flex-direction: column; /* Stack cards vertically on smaller screens */
+	}
+	.testimonial-section-bottom {
+		max-width: 100%; /* Allow the card to take full width */
+		margin: 1rem 0;
+	}
 }
 
 /* Hide scrollbar for Firefox */

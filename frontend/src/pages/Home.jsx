@@ -12,7 +12,7 @@ import Login from "./Login";
 import Signup from "./Signup";
 import About from "./About";
 import Work from "./Work";
-import Persons from "./Persons";
+import Testimonial from "./Testimonial";
 import Footer from "./Footer";
 
 function Home() {
@@ -129,7 +129,7 @@ function Home() {
 				</div>
 				<About />
 				<Work />
-				<Persons />
+				<Testimonial />
 				<Footer />
 				{/* {applicationButton} */}
 				{/* <h1>{loggedInUser}</h1> */}
