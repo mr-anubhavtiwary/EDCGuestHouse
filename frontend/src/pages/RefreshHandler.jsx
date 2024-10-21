@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 
 function RefreshHandler({ setIsAuthenticated }) {
@@ -8,16 +8,29 @@ function RefreshHandler({ setIsAuthenticated }) {
 	useEffect(() => {
 		if (localStorage.getItem("token")) {
 			setIsAuthenticated(true);
-			if (
-				location.pathname === "/" ||
-				location.pathname === "/login" ||
-				location.pathname === "/signup"
-			) {
-				navigate("/home", { replace: false });
+			if (localStorage.getItem("isAdmin")) {
+				if (
+					location.pathname === "/" ||
+					location.pathname === "/login" ||
+					location.pathname === "/signup" ||
+					location.pathname === "/userDashboard" ||
+					location.pathname === "/application"
+				) {
+					navigate("/adminDashboard", { replace: false });
+				}
+			} else {
+				if (
+					location.pathname === "/" ||
+					location.pathname === "/login" ||
+					location.pathname === "/signup" ||
+					location.pathname === "/adminDashboard"
+				) {
+					navigate("/home", { replace: false });
+				}
 			}
 		}
 	}, [location, navigate, setIsAuthenticated]);
-	return (null);
+	return null;
 }
 
 export default RefreshHandler;
