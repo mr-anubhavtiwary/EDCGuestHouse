@@ -1,47 +1,187 @@
-.application-form {
-	width: 500px;
-	margin: auto;
-	padding: 20px;
-	border: 1px solid #ddd;
-	border-radius: 8px;
-	background-color: #f9f9f9;
+/* Container and layout */
+.application-container {
+	max-width: 1200px;
+	margin: 0 auto;
+	padding: 2.5rem;
+	background-color: #f7f7f7;
+	border-radius: 12px;
+	box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+	font-family: "Arial", sans-serif;
 }
 
-.application-form h2,
-.application-form h3 {
+/* Form title */
+.application-form h2 {
 	text-align: center;
+	font-size: 2.2rem;
+	margin-bottom: 2rem;
+	color: #333;
+	border-bottom: 3px solid #0dd2fe;
+	padding-bottom: 1rem;
 }
 
+/* Form sections */
 .application-form div {
-	margin-bottom: 15px;
+	margin-bottom: 1.5rem;
 }
 
+/* Center align headings for sections */
+.application-form h3 {
+	margin-top: 2rem;
+	font-size: 1.6rem;
+	color: #0dd2fe;
+	text-align: center; /* Center the headings */
+}
+
+/* Input labels */
 .application-form label {
 	display: block;
-	margin-bottom: 5px;
 	font-weight: bold;
+	margin-bottom: 0.5rem;
+	font-size: 1rem;
+	color: #555;
 }
 
+/* Text input fields */
 .application-form input,
-.application-form select,
-.application-form textarea {
+.application-form select {
 	width: 100%;
-	padding: 8px;
-	margin-bottom: 10px;
-	border-radius: 4px;
-	border: 1px solid #ccc;
+	padding: 12px;
+	margin-top: 0.25rem;
+	border: 2px solid #ddd;
+	border-radius: 8px;
+	font-size: 1rem;
+	color: #333;
+	background-color: #fff;
+	box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+	transition: border 0.3s ease;
 }
 
-.application-form button {
-	width: 100%;
-	padding: 10px;
-	background-color: #007bff;
+.application-form input:focus,
+.application-form select:focus {
+	border-color: #0dd2fe;
+	outline: none;
+}
+
+/* Submit button */
+.application-form button[type="submit"] {
+	background-color: #0dd2fe;
 	color: white;
+	padding: 15px 25px;
 	border: none;
-	border-radius: 4px;
+	border-radius: 8px;
+	font-size: 1.1rem;
 	cursor: pointer;
+	width: 100%;
+	margin-top: 2rem;
+	transition: background-color 0.3s ease;
 }
 
-.application-form button:hover {
-	background-color: #0056b3;
+.application-form button[type="submit"]:hover {
+	background-color: #0bb1e0;
+}
+
+/* Add Another Person button */
+.application-form button[type="button"] {
+	background-color: #0dd2fe;
+	color: white;
+	padding: 10px 20px;
+	border: none;
+	border-radius: 6px;
+	font-size: 1rem;
+	cursor: pointer;
+	margin-top: 1rem;
+	transition: background-color 0.3s ease;
+	float: right; /* Align the button to the right */
+}
+
+.application-form button[type="button"]:hover {
+	background-color: #0bb1e0;
+}
+
+/* Form row for fields that should appear on the same line */
+.form-row {
+	display: flex;
+	justify-content: space-between;
+}
+
+/* Adjust form columns to split fields evenly in a row */
+.form-column {
+	flex: 1;
+	margin-right: 1rem;
+}
+
+/* Remove extra margin from the last column in the row */
+.form-column:last-child {
+	margin-right: 0;
+}
+
+/* Additional spacing for input fields in rows */
+.form-column input {
+	height: 45px;
+}
+
+/* Input fields styling */
+.application-form input[type="text"],
+.application-form input[type="email"],
+.application-form input[type="date"],
+.application-form input[type="number"] {
+	height: 45px;
+}
+
+.checkbox-container {
+	width: 100%;
+	height: 15px;
+	display: flex;
+	justify-content: flex-start;  /* Aligns content to the left */
+	align-items: center;
+	margin-top: 1.5rem;  /* Adds some space above the checkbox */
+  }
+  
+  .checkbox-container input {
+	width: 15px;
+	height: 15px;
+	margin-right: 10px;  /* Space between the checkbox and the label */
+	cursor: pointer;
+  }
+  
+  .checkbox-container label {
+	font-size: 1rem;
+	color: #555;
+	cursor: pointer;
+  }
+.accompanying-persons {
+	display: flex;
+	flex-direction: column;
+}
+/* Responsive design for mobile */
+@media (max-width: 768px) {
+	.application-container {
+		padding: 1.5rem;
+	}
+
+	.form-row {
+		flex-direction: column;
+	}
+
+	.application-form h2 {
+		font-size: 2rem;
+	}
+
+	.application-form h3 {
+		font-size: 1.4rem;
+	}
+
+	.application-form button {
+		font-size: 1rem;
+	}
+
+	.application-form label {
+		font-size: 0.9rem;
+	}
+
+	.application-form button[type="button"] {
+		float: none;
+		display: block;
+		width: 100%; /* Full width for button on smaller screens */
+	}
 }

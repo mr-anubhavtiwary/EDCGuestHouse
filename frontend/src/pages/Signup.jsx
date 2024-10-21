@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { ToastContainer } from "react-toastify";
+
 import "../assets/stylesheets/Signup.css";
 import { handleError, handleSuccess } from "../utils";
 import { IoMdClose } from "react-icons/io";
@@ -98,7 +98,6 @@ function Signup({ setPopup }) {
 					Signup
 				</button>
 			</form>
-			<ToastContainer />
 		</div>
 	);
 }

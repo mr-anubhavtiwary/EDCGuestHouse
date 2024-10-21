@@ -3,10 +3,13 @@ import "./App.css";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import Home from "./pages/Home";
+import { ToastContainer } from "react-toastify";
 import "react-toastify/ReactToastify.css";
 import RefreshHandler from "./pages/RefreshHandler";
 import { useState } from "react";
 import Application from "./pages/Application";
+import AdminDashboard from "./pages/AdminDashboard";
+import UserDashboard from "./pages/UserDashboard";
 
 function App() {
 	const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -25,7 +28,10 @@ function App() {
 					element={<PrivateRoutes element={<Application />} />}
 				/>
 				<Route path='/home' element={<Home />} />
+				<Route path='/adminDashboard' element={<AdminDashboard />} />
+				<Route path='/userDashboard' element={<UserDashboard />} />
 			</Routes>
+			<ToastContainer />
 		</div>
 	);
 }

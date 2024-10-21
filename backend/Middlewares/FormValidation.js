@@ -6,6 +6,9 @@ const applicationSchema = Joi.object({
 	// 	"string.empty": "Applicant name is required.",
 	// 	"string.min": "Applicant name must be at least 3 characters long.",
 	// }),
+	status: Joi.string().valid("approved", "pending", "rejected").messages({
+		"any.only": "Status must be applicant must be approved, pending or rejected",
+	}),
 
     email: Joi.string().email().required(),
     

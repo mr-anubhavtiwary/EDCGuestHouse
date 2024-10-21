@@ -40,6 +40,17 @@ nav {
 	font-size: 1.1rem;
 	font-weight: 600;
 }
+.navbar-username{
+	display:flex;
+	flex-direction:row;
+	justify-content: center;
+	align-items: center;
+	font-size: 2rem;
+	color:rgb(13, 246, 254);
+	font-weight: 200;
+	gap:10px;
+	cursor: pointer;
+}
 .home-banner-container {
 	position: relative;
 	display: flex;
@@ -165,13 +176,14 @@ nav {
 	margin: 6rem 0 2rem 0; /* Adjust top and bottom margins */
 	padding-bottom: 2rem; /* Add padding at the bottom */
 	display: flex;
-	flex-direction: column;
+	flex-direction: row;
 	align-items: center; /* Center content */
 	width: 100%; /* Ensure it spans full width */
 	background-color: #f9f9f9; /* Optional: Add a light background */
 }
 .footer-logo-container {
-	max-width: 120px;
+	max-width: 80px;
+	margin-left:30px;
 }
 .footer-icons {
 	margin-top: 2.5rem;
@@ -189,19 +201,20 @@ nav {
 }
 .footer-section-one {
 	display: flex;
+	flex-direction: column;
 	justify-content: space-between;
-	align-items: center;
+	align-items: left;
 	width: 100%;
 	max-width: 1200px; /* Limit the max width to avoid stretching */
-	padding: 1rem 2rem;
+	padding: 1rem 5rem;
 }
 .footer-section-two {
 	display: flex;
+	flex-direction: row;
 	justify-content: space-around;
 	align-items: flex-start;
 	width: 100%;
-	max-width: 1200px; /* Consistent max width */
-	flex-wrap: wrap; /* Make it responsive */
+	max-width: 1500px; /* Consistent max width */
 	padding: 1rem 2rem;
 	margin-top: 2rem;
 }

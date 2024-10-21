@@ -1,10 +1,11 @@
 const UserModel = require("../Models/User");
+const AdminModel = require("../Models/admin");
 const ApplicationModel = require("../Models/application");
 const mongoose = require("mongoose");
 
 // Session handling with transaction, concurrency, duplicate entries, and proper error handling.
 const application = async (req, res) => {
-    // console.log(req.body());
+	// console.log(req.body());
 	const session = await mongoose.startSession();
 	session.startTransaction();
 	try {
@@ -36,25 +37,28 @@ const application = async (req, res) => {
 				success: false,
 			});
 		}
-    console.log(user);
 
-		const userid = user._id.toHexString();
+		// console.log(user);
+
+		const userid = user._id;
 
 		// Check for duplicate application
 		const existingApplication = await ApplicationModel.findOne({
 			userid,
 			employeeCode,
 		}).session(session);
-		if (existingApplication) {
+		if (existingApplication > 3) {
 			await session.abortTransaction();
 			return res.status(400).json({
-				message: "An application with this employee code already exists for this user.",
+				message: "An user cannot send more than three applications.",
 				success: false,
 			});
 		}
+		// console.log(existingApplication);
 
 		// Creating new application with all form fields
 		const applicationModel = new ApplicationModel({
+			status: "pending",
 			userid,
 			email,
 			designation,
@@ -77,9 +81,14 @@ const application = async (req, res) => {
 		const savedApplication = await applicationModel.save({ session }); // Save the application and get the saved document
 
 		// Push application ID to user's applications array
-		const application_id = savedApplication._id.toHexString();
+		const application_id = savedApplication._id;
 		await UserModel.updateOne(
 			{ _id: user._id },
+			{ $push: { applications: application_id } },
+			{ session }
+		);
+		await AdminModel.updateOne(
+			{},
 			{ $push: { applications: application_id } },
 			{ session }
 		);
@@ -102,6 +111,28 @@ const application = async (req, res) => {
 	}
 };
 
+const getUserApplications = async (req, res) => {
+	try {
+		const userId = req.userId;
+		// console.log("user id : ", userId);
+		const applicationData = await UserModel.findOne({ _id: userId })
+			.populate("applications")
+			.select("applications");
+
+		res.status(201).json({
+			message: "Signup successfully",
+			success: true,
+			data: applicationData.applications,
+		});
+	} catch (err) {
+		res.status(500).json({
+			message: "Internal Server Error",
+			success: false,
+		});
+	}
+};
+
 module.exports = {
 	application,
+	getUserApplications,
 };

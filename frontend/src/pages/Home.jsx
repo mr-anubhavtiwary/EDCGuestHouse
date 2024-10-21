@@ -1,9 +1,7 @@
-import react, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { handleError, handleSuccess } from "../utils";
-import { ToastContainer } from "react-toastify";
+import { handleSuccess } from "../utils";
 import BannerBackground from "../assets/images/aqua4.png";
-// import BannerBackground from "../assets/images/aqua.png";
 import BannerImage from "../assets/images/banner.png";
 import "../assets/stylesheets/Home.css";
 import Navbar from "./Navbar";
@@ -25,7 +23,9 @@ function Home() {
 		localStorage.removeItem("token");
 		localStorage.removeItem("loggedInUser");
 		localStorage.removeItem("loggedInUserEmail");
-		setLoggedInUser(false);
+		localStorage.removeItem("isAdmin");
+		const token = localStorage.getItem("token");
+		if(!token) setLoggedInUser(false);
 		handleSuccess("User logged out");
 		setTimeout(() => {
 			navigate("/home");
@@ -44,35 +44,20 @@ function Home() {
 		if (loggedInUser) {
 			navigate("/application", {
 				state: {
-				  loggedInUser,
-				  loggedInUserEmail: localStorage.getItem("loggedInUserEmail"),
+					loggedInUser,
+					loggedInUserEmail:
+						localStorage.getItem("loggedInUserEmail"),
 				},
-			  });
+			});
 		} else {
 			setPopup(1);
 		}
 	};
-	console.log(localStorage.getItem("loggedInUserEmail"));
+	// console.log(localStorage.getItem("loggedInUserEmail"));
 	useEffect(() => {
 		setLoggedInUser(localStorage.getItem("loggedInUser"));
 	}, [popup]);
 
-	// const fetchProducts = async () => {
-	// 	try {
-	// 		const url = "http://localhost:8080/products";
-	// 		const headers = {
-	// 			headers: {
-	// 				Authorization: localStorage.getItem("token"),
-	// 			},
-	// 		};
-	// 		const response = await fetch(url, headers);
-	// 		const result = await response.json();
-	//         setProducts(result);
-	// 		console.log(result);
-	// 	} catch (err) {
-	// 		handleError(err);
-	// 	}
-	// };
 	let buttons;
 	if (loggedInUser) {
 		buttons = (
@@ -134,6 +119,7 @@ function Home() {
 				<About />
 				<Work />
 				<Testimonial />
+				{/* <button onClick={handleAdmin}>Admin</button> */}
 				<Footer />
 				{/* {applicationButton} */}
 				{/* <h1>{loggedInUser}</h1> */}
@@ -153,7 +139,6 @@ function Home() {
 					{popup === 2 && <Signup setPopup={setPopup} />}
 				</div>
 			)}
-			<ToastContainer />
 		</>
 	);
 }

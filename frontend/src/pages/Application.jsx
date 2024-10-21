@@ -1,13 +1,16 @@
-import react, { useState } from "react";
+import { useState } from "react";
 import { handleError, handleSuccess } from "../utils";
 import { useNavigate, useLocation } from "react-router-dom";
-import { ToastContainer } from "react-toastify";
+
 import "../assets/stylesheets/Application.css";
+import Footer from "./Footer";
+import Navbar from "./Navbar";
 
 function Application() {
 	const navigate = useNavigate();
 	const location = useLocation();
 	const { loggedInUser, loggedInUserEmail } = location.state || {};
+	const [termsAccepted, setTermsAccepted] = useState(false);
 
 	const [formData, setFormData] = useState({
 		designation: "A",
@@ -33,6 +36,10 @@ function Application() {
 	};
 
 	const handleAddPerson = () => {
+		if (formData.accompanyingPersons.length >= 3) {
+			handleError("You can add a maximum of 3 accompanying persons.");
+			return;
+		}
 		setFormData({
 			...formData,
 			accompanyingPersons: [
@@ -40,6 +47,10 @@ function Application() {
 				{ name: "", relation: "" },
 			],
 		});
+	};
+
+	const handleCheckboxChange = (e) => {
+		setTermsAccepted(e.target.checked);
 	};
 
 	const handlePersonChange = (index, e) => {
@@ -55,9 +66,9 @@ function Application() {
 		e.preventDefault();
 		// const { employeeCode, purpose } = formData;
 
-		// if (!employeeCode || !purpose) {
-		// 	return handleError("All fields are required");
-		// }
+		if (!termsAccepted) {
+			return handleError("T&C must be Agreed");
+		}
 
 		try {
 			const url = "http://localhost:8080/auth/application";
@@ -86,9 +97,24 @@ function Application() {
 			handleError(err.message);
 		}
 	};
-
+	const handleLogout = () => {
+		localStorage.removeItem("token");
+		localStorage.removeItem("loggedInUser");
+		localStorage.removeItem("loggedInUserEmail");
+		// setLoggedInUser(false);
+		handleSuccess("Admin logged out");
+		setTimeout(() => {
+			navigate("/home");
+		}, 1000);
+	};
+	let buttons = (
+		<button className='primary-button' onClick={handleLogout}>
+			Logout
+		</button>
+	);
 	return (
 		<div className='application-container'>
+			<Navbar user={loggedInUser} buttons={buttons}/>
 			<form className='application-form' onSubmit={handleSubmit}>
 				<h2>Room Allotment Application</h2>
 
@@ -117,15 +143,28 @@ function Application() {
 					</select>
 				</div>
 
-				<div>
-					<label>Employee Code</label>
-					<input
-						type='text'
-						name='employeeCode'
-						value={formData.employeeCode}
-						onChange={handleChange}
-						required
-					/>
+				<div className='form-row'>
+					<div className='form-column'>
+						<label>Employee Code</label>
+						<input
+							type='text'
+							name='employeeCode'
+							value={formData.employeeCode}
+							onChange={handleChange}
+							required
+						/>
+					</div>
+
+					<div className='form-column'>
+						<label>Phone Number</label>
+						<input
+							type='text'
+							name='applicantPhone'
+							value={formData.applicantPhone}
+							onChange={handleChange}
+							required
+						/>
+					</div>
 				</div>
 
 				<div>
@@ -134,17 +173,6 @@ function Application() {
 						type='text'
 						name='applicantAddress'
 						value={formData.applicantAddress}
-						onChange={handleChange}
-						required
-					/>
-				</div>
-
-				<div>
-					<label>Phone Number</label>
-					<input
-						type='text'
-						name='applicantPhone'
-						value={formData.applicantPhone}
 						onChange={handleChange}
 						required
 					/>
@@ -173,26 +201,28 @@ function Application() {
 					/>
 				</div>
 
-				<div>
-					<label>Guest Mobile Number</label>
-					<input
-						type='text'
-						name='guestMobile'
-						value={formData.guestMobile}
-						onChange={handleChange}
-						required
-					/>
-				</div>
+				<div className='form-row'>
+					<div className='form-column'>
+						<label>Guest Mobile Number</label>
+						<input
+							type='text'
+							name='guestMobile'
+							value={formData.guestMobile}
+							onChange={handleChange}
+							required
+						/>
+					</div>
 
-				<div>
-					<label>Guest Email</label>
-					<input
-						type='email'
-						name='guestEmail'
-						value={formData.guestEmail}
-						onChange={handleChange}
-						required
-					/>
+					<div className='form-column'>
+						<label>Guest Email</label>
+						<input
+							type='email'
+							name='guestEmail'
+							value={formData.guestEmail}
+							onChange={handleChange}
+							required
+						/>
+					</div>
 				</div>
 
 				<div>
@@ -210,31 +240,31 @@ function Application() {
 						<option value='D'>Other</option>
 					</select>
 				</div>
+				<div className='accompanying-persons'>
+					<h3>Accompanying Persons</h3>
+					{formData.accompanyingPersons.map((person, index) => (
+						<div key={index}>
+							<label>Person {index + 1} Name</label>
+							<input
+								type='text'
+								name='name'
+								value={person.name}
+								onChange={(e) => handlePersonChange(index, e)}
+							/>
 
-				<h3>Accompanying Persons</h3>
-				{formData.accompanyingPersons.map((person, index) => (
-					<div key={index}>
-						<label>Person {index + 1} Name</label>
-						<input
-							type='text'
-							name='name'
-							value={person.name}
-							onChange={(e) => handlePersonChange(index, e)}
-						/>
-
-						<label>Relation</label>
-						<input
-							type='text'
-							name='relation'
-							value={person.relation}
-							onChange={(e) => handlePersonChange(index, e)}
-						/>
-					</div>
-				))}
-				<button type='button' onClick={handleAddPerson}>
-					Add Another Person
-				</button>
-
+							<label>Relation</label>
+							<input
+								type='text'
+								name='relation'
+								value={person.relation}
+								onChange={(e) => handlePersonChange(index, e)}
+							/>
+						</div>
+					))}
+					<button type='button' onClick={handleAddPerson}>
+						Add Another Person
+					</button>
+				</div>
 				<div>
 					<label>Rent Paid By</label>
 					<select
@@ -292,10 +322,29 @@ function Application() {
 						<option value='Official'>Official</option>
 					</select>
 				</div>
-
+				<div className='checkbox-container'>
+					<input
+						type='checkbox'
+						id='termsCheckbox'
+						checked={termsAccepted}
+						onChange={handleCheckboxChange}
+						required
+					/>
+					<label htmlFor='termsCheckbox'>
+						I confirm that the information provided is accurate and
+						I agree to the{" "}
+						<a
+							href='https://www.mnnit.ac.in/images/newstories/2022/edc/905-_Notice_for_Revised_Tariff__Food_Charges_of_EDC_10.08.2022.pdf'
+							alt='terms and conditions'
+							target='blank'
+						>
+							terms and conditions.
+						</a>
+					</label>
+				</div>
 				<button type='submit'>Submit</button>
 			</form>
-			<ToastContainer />
+			<Footer />
 		</div>
 	);
 }

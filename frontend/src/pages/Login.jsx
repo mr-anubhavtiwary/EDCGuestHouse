@@ -1,22 +1,25 @@
-import React, { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import { ToastContainer } from "react-toastify";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import "../assets/stylesheets/Login.css";
 import { handleError, handleSuccess } from "../utils";
 import { IoMdClose } from "react-icons/io";
+import Radio from "@mui/material/Radio";
+import RadioGroup from "@mui/material/RadioGroup";
+import { FormControl, FormControlLabel, FormLabel } from "@mui/material";
 
 function Login({ setPopup }) {
-	const [LoginInfo, setLoginInfo] = useState({
+	const [loginInfo, setLoginInfo] = useState({
 		email: "",
 		password: "",
 	});
+	const [admin, setAdmin] = useState(false);
 
 	const navigate = useNavigate();
 
 	const handleChange = (e) => {
 		const { name, value } = e.target;
 		// console.log(name, value);
-		const copyLoginInfo = { ...LoginInfo };
+		const copyLoginInfo = { ...loginInfo };
 		copyLoginInfo[name] = value;
 		setLoginInfo(copyLoginInfo);
 	};
@@ -24,31 +27,37 @@ function Login({ setPopup }) {
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
-		const { email, password } = LoginInfo;
+		const { email, password } = loginInfo;
 		if (!email || !password) {
 			return handleError("All fields are required");
 		}
 		try {
-			const url = "http://localhost:8080/auth/login";
+			const url = `http://localhost:8080/auth/${
+				admin ? "adminLogin" : "login"
+			}`;
 			const response = await fetch(url, {
 				method: "POST",
 				headers: {
 					"content-Type": "application/json",
 				},
-				body: JSON.stringify(LoginInfo),
+				body: JSON.stringify(loginInfo),
 			});
 			const result = await response.json();
 			const { success, message, jwtToken, name, email, error } = result;
 			console.log(email);
 			if (success) {
+
 				handleSuccess(message);
 				localStorage.setItem("token", jwtToken);
 				localStorage.setItem("loggedInUser", name);
 				localStorage.setItem("loggedInUserEmail", email);
+				localStorage.setItem("isAdmin", admin);
+				// localStorage.setItem("loggedInUserRole", admin);
 				// console.log("loggedInUser");
 				setTimeout(() => {
 					setPopup(null);
-					navigate("/home");
+					if(!admin) navigate("/home");
+					else navigate("/adminDashboard");
 				}, 1000);
 			} else {
 				handleError(message || error.details[0].message);
@@ -68,6 +77,37 @@ function Login({ setPopup }) {
 			</div>
 
 			<form onSubmit={handleSubmit}>
+				<FormControl>
+					<FormLabel
+						id='demo-row-radio-buttons-group-label'
+						style={{}}
+					>
+						Role
+					</FormLabel>
+					<RadioGroup
+						row
+						defaultValue='user'
+						aria-labelledby='demo-row-radio-buttons-group-label'
+						name='row-radio-buttons-group'
+					>
+						<FormControlLabel
+							value='user'
+							control={<Radio />}
+							label='User'
+							onChange={() => {
+								setAdmin(false);
+							}}
+						/>
+						<FormControlLabel
+							value='admin'
+							control={<Radio />}
+							label='Admin'
+							onChange={() => {
+								setAdmin(true);
+							}}
+						/>
+					</RadioGroup>
+				</FormControl>
 				<div>
 					<label htmlFor='email'>Email</label>
 					<input
@@ -75,7 +115,7 @@ function Login({ setPopup }) {
 						type='email'
 						name='email'
 						placeholder='Enter your email...'
-						value={LoginInfo.email}
+						value={loginInfo.email}
 					/>
 				</div>
 				<div>
@@ -85,12 +125,11 @@ function Login({ setPopup }) {
 						type='text'
 						name='password'
 						placeholder='Enter your password...'
-						value={LoginInfo.password}
+						value={loginInfo.password}
 					/>
 				</div>
 				<button type='submit'>Login</button>
 			</form>
-			<ToastContainer />
 		</div>
 	);
 }

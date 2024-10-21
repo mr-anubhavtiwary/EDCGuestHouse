@@ -26,6 +26,15 @@ const ApplicationSchema = new mongoose.Schema(
 		// 	minlength: 3,
 		// 	maxlength: 100,
 		// },
+		status: {
+			type: String,
+			enum: ["approved", "pending", "rejected"],
+			required: true,
+		},
+		userid: {
+			type: mongoose.Schema.Types.ObjectId,
+			ref: "users",
+		},
 		designation: {
 			type: String,
 			enum: ["A", "B", "C", "D"], // Director, head/section in charge, etc.
@@ -119,4 +128,5 @@ function arrayLimit(val) {
 }
 
 // Create and export the Application model
-module.exports = mongoose.model("Application", ApplicationSchema);
+const ApplicationModel = mongoose.model("Application", ApplicationSchema);
+module.exports = ApplicationModel;

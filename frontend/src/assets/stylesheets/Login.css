@@ -31,10 +31,10 @@
 	gap: 10px;
 }
 
-.container div {
+/* .container div {
 	display: flex;
 	flex-direction: column;
-}
+} */
 
 .container input {
 	width: 100%;
@@ -66,12 +66,17 @@
 }
 
 .container-heading {
-  position: absolute;
-  padding: 20px;
-  top: 0;
-  right: 0;
-  cursor: pointer;
-  background: none;
-  border: none;
-  font-size: 16px;
+	position: absolute;
+	padding: 20px;
+	top: 0;
+	right: 0;
+	cursor: pointer;
+	background: none;
+	border: none;
+	font-size: 16px;
+}
+
+.login-main-container {
+	width: 100%;
+	height: 100%;
 }
