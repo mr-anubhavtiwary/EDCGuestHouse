@@ -15,7 +15,7 @@ const IsAdmin = async (req, res, next) => {
 				return res.status(403).json({ message: "Unauthorised Access" });
 			}
 			req.adminId = res._id;
-			console.log(req.adminId);
+			// console.log(req.adminId);
 			next();
 		} catch (err) {
 			return res.status(401).json({

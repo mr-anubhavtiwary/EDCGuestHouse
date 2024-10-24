@@ -89,7 +89,7 @@ function Application() {
 				handleSuccess(message);
 				setTimeout(() => {
 					// navigate("/home");
-				}, 1000);
+				}, 500);
 			} else {
 				handleError(message || error.details[0].message);
 			}
@@ -105,7 +105,7 @@ function Application() {
 		handleSuccess("Admin logged out");
 		setTimeout(() => {
 			navigate("/home");
-		}, 1000);
+		}, 500);
 	};
 	let buttons = (
 		<button className='primary-button' onClick={handleLogout}>

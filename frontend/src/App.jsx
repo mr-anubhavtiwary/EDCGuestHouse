@@ -1,7 +1,7 @@
 import { Navigate, Route, Routes } from "react-router-dom";
 import "./App.css";
-import Login from "./pages/Login";
-import Signup from "./pages/Signup";
+// import Login from "./pages/Login";
+// import Signup from "./pages/Signup";
 import Home from "./pages/Home";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/ReactToastify.css";

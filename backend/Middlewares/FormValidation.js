@@ -2,10 +2,6 @@ const Joi = require("joi");
 
 // Define the Joi schema
 const applicationSchema = Joi.object({
-	// applicantName: Joi.string().min(3).max(100).required().messages({
-	// 	"string.empty": "Applicant name is required.",
-	// 	"string.min": "Applicant name must be at least 3 characters long.",
-	// }),
 	status: Joi.string().valid("approved", "pending", "rejected").messages({
 		"any.only": "Status must be applicant must be approved, pending or rejected",
 	}),

@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
 import profilepic1 from "../assets/images/johndoe.png";
+import profilepic2 from "../assets/images/profile2.jpg";
+import profilepic3 from "../assets/images/profile3.jpg";
 import { AiFillStar } from "react-icons/ai";
 
 const testimonials = [
@@ -9,12 +11,12 @@ const testimonials = [
 		name: "Anubhav Anand",
 	},
 	{
-		image: profilepic1,
+		image: profilepic2,
 		text: "It's a very nice place in MNNIT campus for guest stay and food. Green and spacious. Tasty food in mess. Overall everything here is good.",
 		name: "Prakash Kumar",
 	},
 	{
-		image: profilepic1,
+		image: profilepic3,
 		text: "A very well managed place. Food is awesome. Service is very nice. Absolutely wonderful three days stay for me here. Rooms are also good. Quality place with cost effective rates. 5 Star from me.",
 		name: "Aadersh Chaubey",
 	},

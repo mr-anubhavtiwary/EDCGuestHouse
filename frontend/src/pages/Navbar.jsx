@@ -1,9 +1,11 @@
-// import React from "react";
 import { useNavigate } from "react-router-dom";
 import "../assets/stylesheets/Home.css";
 import Avatar from "@mui/material/Avatar";
 
+const isAdmin = localStorage.getItem("isAdmin") === "true";
 function stringToColor(string) {
+	if (!string) return "";
+	if (isAdmin) return "#eb4545ed";
 	let hash = 0;
 	let i;
 	for (i = 0; i < string.length; i += 1) {
@@ -31,31 +33,41 @@ function stringAvatar(name) {
 
 function Navbar({ user, buttons }) {
 	const navigate = useNavigate();
+
 	const handleProfile = () => {
-		const isAdmin = localStorage.getItem("isAdmin");
-		console.log("isAdmin", typeof isAdmin);
 		setTimeout(function () {
 			if (isAdmin === "true") {
-				navigate("/adminDashboard");
-				console.log("admin");
+				setTimeout(() => {
+					navigate("/adminDashboard");
+				}, 500);
 			} else {
-				navigate("/userDashboard");
+				setTimeout(() => {
+					navigate("/userDashboard");
+				}, 500);
 			}
 		}, 1000);
 	};
-
+	const nameColor = stringToColor(user);
 	return (
 		<nav>
 			<div className='navbar-username'>
 				{user && (
 					<Avatar {...stringAvatar(user)} onClick={handleProfile} />
 				)}
-				{user}
+				<div style={{ color: `${isAdmin ? "#eb4545ed" : nameColor}` }}>
+					{user}
+				</div>
 			</div>
 			<div className='navbar-links-container'>
-				<a href='/home'>Home</a>
-				<a href=''>About</a>
-				<a href=''>Contact</a>
+				<a href='/home' style={{ color: "#302f2fec" }}>
+					Home
+				</a>
+				<a href='' style={{ color: "#302f2fec" }}>
+					About
+				</a>
+				<a href='' style={{ color: "#302f2fec" }}>
+					Contact
+				</a>
 				{buttons}
 			</div>
 		</nav>

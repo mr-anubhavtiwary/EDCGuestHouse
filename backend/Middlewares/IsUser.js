@@ -15,7 +15,7 @@ const IsUser = async (req, res, next) => {
 				return res.status(403).json({ message: "Unauthorised Access" });
 			}
 			req.userId = user._id;
-			console.log(req.userId);
+			// console.log(req.userId);
 			next();
 		} catch (err) {
 			return res.status(401).json({

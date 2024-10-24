@@ -45,7 +45,7 @@ function Signup({ setPopup }) {
 				setTimeout(() => {
 					setPopup(null);
 					navigate("/home");
-				}, 1000);
+				}, 500);
 			} else {
 				handleError(message || error.details[0].message);
 			}

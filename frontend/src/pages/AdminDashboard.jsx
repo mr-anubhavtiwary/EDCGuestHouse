@@ -15,6 +15,7 @@ import { Navigate, useNavigate } from "react-router-dom";
 import Navbar from "./Navbar";
 import Footer from "./Footer";
 import { handleSuccess } from "../utils";
+import BannerBackground from "../assets/images/adminbanner.png";
 
 export const AdminDashboard = () => {
 	// State to store applications data
@@ -99,7 +100,10 @@ export const AdminDashboard = () => {
 	return (
 		<>
 			<Navbar user={"Admin"} buttons={buttons} />
-
+		    <div className='user-container'>
+				<div className='user-bannerImage-container'>
+					<img src={BannerBackground} alt='' />
+				</div>
 			<Box
 				sx={{
 					padding: 4,
@@ -107,7 +111,7 @@ export const AdminDashboard = () => {
 					minHeight: "100vh",
 				}}
 			>
-				<Typography variant='h4' gutterBottom sx={{ color: "#0dd2fe" }}>
+				<Typography variant='h4' gutterBottom sx={{ color: "#eb4545ed" }}>
 					Dashboard
 				</Typography>
 
@@ -133,11 +137,11 @@ export const AdminDashboard = () => {
 								<AccordionSummary
 									expandIcon={
 										<ExpandMoreIcon
-											sx={{ color: "#0dd2fe" }}
+											sx={{ color: "#eb4545ed" }}
 										/>
 									}
 									sx={{
-										backgroundColor: "#0dd2fe",
+										backgroundColor: "#f73b3bf3",
 										color: "#fff",
 										borderRadius: "4px",
 									}}
@@ -352,6 +356,7 @@ export const AdminDashboard = () => {
 					)}
 				</Paper>
 			</Box>
+			</div>
 			<Footer />
 		</>
 	);

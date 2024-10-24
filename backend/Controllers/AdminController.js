@@ -24,15 +24,6 @@ const getAdminApplications = async (req, res) => {
 const patchApplicationStatus = async (req, res) => {
 	const { appId } = req.params; // Extract the application ID from the request parameters
 	const { status } = req.body; // Extract the new status from the request body
-	// console.log("appID", appId);
-	// // Validate the status to make sure it's one of the allowed values
-	// const validStatuses = ["approved", "pending", "rejected"];
-	// if (!validStatuses.includes(status)) {
-	// 	return res
-	// 		.status(400)
-	// 		.json({ success: false, message: "Invalid status value" });
-	// }
-
 	try {
 		// Find the application by its ID and update its status
 		const updatedApplication = await ApplicationModel.findByIdAndUpdate(

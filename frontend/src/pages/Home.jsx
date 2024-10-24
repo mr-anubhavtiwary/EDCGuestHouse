@@ -12,6 +12,7 @@ import About from "./About";
 import Work from "./Work";
 import Testimonial from "./Testimonial";
 import Footer from "./Footer";
+import Gallary from "./Gallary";
 
 function Home() {
 	const [loggedInUser, setLoggedInUser] = useState("");
@@ -25,11 +26,11 @@ function Home() {
 		localStorage.removeItem("loggedInUserEmail");
 		localStorage.removeItem("isAdmin");
 		const token = localStorage.getItem("token");
-		if(!token) setLoggedInUser(false);
+		if (!token) setLoggedInUser(false);
 		handleSuccess("User logged out");
 		setTimeout(() => {
 			navigate("/home");
-		}, 1000);
+		}, 500);
 	};
 
 	const handleLogin = () => {
@@ -119,19 +120,8 @@ function Home() {
 				<About />
 				<Work />
 				<Testimonial />
-				{/* <button onClick={handleAdmin}>Admin</button> */}
+				<Gallary />
 				<Footer />
-				{/* {applicationButton} */}
-				{/* <h1>{loggedInUser}</h1> */}
-				{/* <button onClick={handleLogout}>Logout</button> */}
-				{/* {buttons} */}
-				{/* <div>
-					products && products.map((item, index)=>{
-						<ul key={index}>
-							<span>{item.name} : {item.price}</span>
-						</ul>
-					})
-				</div> */}
 			</div>
 			{popup && (
 				<div className='popup-box'>

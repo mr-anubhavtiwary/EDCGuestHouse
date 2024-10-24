@@ -44,21 +44,22 @@ function Login({ setPopup }) {
 			});
 			const result = await response.json();
 			const { success, message, jwtToken, name, email, error } = result;
-			console.log(email);
+			// console.log(email);
 			if (success) {
-
 				handleSuccess(message);
 				localStorage.setItem("token", jwtToken);
 				localStorage.setItem("loggedInUser", name);
 				localStorage.setItem("loggedInUserEmail", email);
 				localStorage.setItem("isAdmin", admin);
-				// localStorage.setItem("loggedInUserRole", admin);
-				// console.log("loggedInUser");
+
 				setTimeout(() => {
 					setPopup(null);
-					if(!admin) navigate("/home");
-					else navigate("/adminDashboard");
-				}, 1000);
+					if (!admin) {
+						navigate("/home");
+					} else {
+						navigate("/adminDashboard");
+					}
+				}, 500);
 			} else {
 				handleError(message || error.details[0].message);
 			}
