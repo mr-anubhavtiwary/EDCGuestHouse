@@ -11,6 +11,7 @@ import Application from "./pages/Application";
 import AdminDashboard from "./pages/AdminDashboard";
 import UserDashboard from "./pages/UserDashboard";
 import Book from "./pages/Book";
+import NotFound from "./pages/NotFound";
 
 function App() {
 	const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -22,8 +23,6 @@ function App() {
 			<RefreshHandler setIsAuthenticated={setIsAuthenticated} />
 			<Routes>
 				<Route path='/' element={<Navigate to='/home' />} />
-				<Route path='/login' element={<Login />} />
-				<Route path='/signup' element={<Signup />} />
 				<Route
 					path='/application'
 					element={<PrivateRoutes element={<Application />} />}
@@ -32,6 +31,8 @@ function App() {
 				<Route path='/adminDashboard' element={<AdminDashboard />} />
 				<Route path='/userDashboard' element={<UserDashboard />} />
 				<Route path='/book' element={<Book />} />
+				{/* 404 Route */}
+				<Route path="*" element={<NotFound />} />
 			</Routes>
 			<ToastContainer />
 		</div>

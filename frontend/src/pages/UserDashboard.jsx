@@ -22,7 +22,7 @@ export const UserDashboard = () => {
 	const [applications, setApplications] = useState([]);
 	const navigate = useNavigate();
 	const loggedInUser = localStorage.getItem("loggedInUser");
-	console.log(loggedInUser);
+	// console.log(loggedInUser);
 	useEffect(() => {
 		const fetchData = async () => {
 			const token = localStorage.getItem("token");
@@ -63,16 +63,36 @@ export const UserDashboard = () => {
 		}, 1000);
 	};
 
-	const handleBook = () => {
-		setTimeout(() => {
-			navigate("/book", {
-				state: {
-					loggedInUser,
-					// buttons,
+	const handleBook = async ( appId, appStatus ) => {
+		const token = localStorage.getItem("token");
+		// console.log(appId);
+		// console.log(appStatus);
+        
+		const url = `http://localhost:8080/auth/user/applications/${appId}/status?status=${appStatus}`;
+
+		try {
+			const response = await fetch(url, {
+				method: "GET",
+				headers: {
+					"Content-Type": "application/json",
+					Authorization: `Bearer ${token}`,
 				},
 			});
-		}, 1000);
-	}
+
+			const data = await response.json();
+			// console.log(data);
+
+			if (data && data.success) {
+				setTimeout(() => {
+					navigate("/book");
+				}, 1000);
+			} else {
+				console.error("Status not approved:", data.message);
+			}
+		} catch (error) {
+			console.error("Error fetching status:", error);
+		}
+	};
 	let buttons = (
 		<button className='primary-button' onClick={handleLogout}>
 			Logout
@@ -234,6 +254,10 @@ export const UserDashboard = () => {
 									>
 										<Grid item xs={12} sm={4}>
 											<Typography>
+												<strong>No. of Rooms:</strong>{" "}
+												{app.numberOfRooms.toLocaleString()}
+											</Typography>
+											<Typography>
 												<strong>Rent Paid By:</strong>{" "}
 												{app.rentPaidBy}
 											</Typography>
@@ -273,14 +297,20 @@ export const UserDashboard = () => {
 											</Typography>
 										</Grid>
 									</Grid>
-									{app.status === "approved"?<Button
-										size='large'
-										color='secondary'
-										startIcon={<AddIcon />}
-										onClick={handleBook}
-									>
-										Book
-									</Button>: ""}
+									{app.status === "approved" ? (
+										<Button
+											size='large'
+											color='secondary'
+											startIcon={<AddIcon />}
+											onClick={() =>
+												handleBook(app._id, app.status)
+											}
+										>
+											Book
+										</Button>
+									) : (
+										""
+									)}
 								</AccordionDetails>
 							</Accordion>
 						))

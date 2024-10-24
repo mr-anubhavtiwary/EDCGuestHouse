@@ -132,7 +132,41 @@ const getUserApplications = async (req, res) => {
 	}
 };
 
+const getApplicationStatus = async (req, res) => {
+	const { appId } = req.params;
+	const { status } = req.query;
+	// console.log("appID", appId);
+	try {
+		// Find the application by its ID and update its status
+		// console.log("app id", appId);
+		const findApplication = await ApplicationModel.findOne({ _id: appId });
+		// console.log("app data", findApplication);
+		// If the application is not found
+		if (!findApplication) {
+			return res
+				.status(404)
+				.json({ success: false, message: "Application not found" });
+		}
+		if (status != "approved") {
+			return res
+				.status(404)
+				.json({ success: false, message: "Application not approved" });
+		}
+		// Send back the updated application data
+		return res
+			.status(200)
+			.json({ success: true, message: "Application is approved" });
+	} catch (error) {
+		// Handle any errors that occur during the process
+		console.error("Error application status:", error);
+		return res
+			.status(500)
+			.json({ success: false, message: "Server error" });
+	}
+};
+
 module.exports = {
 	application,
 	getUserApplications,
+	getApplicationStatus,
 };

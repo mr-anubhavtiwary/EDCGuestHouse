@@ -1,5 +1,5 @@
 const { signup, login, adminLogin } = require("../Controllers/AuthController");
-const { application, getUserApplications } = require("../Controllers/UserController");
+const { application, getUserApplications, getApplicationStatus } = require("../Controllers/UserController");
 const {
 	signupValidation,
 	loginValidation,
@@ -19,6 +19,8 @@ router.post("/adminLogin", loginValidation, adminLogin);
 router.get("/admin/applications", IsAdmin, getAdminApplications);
 
 router.get("/user/applications", IsUser, getUserApplications);
+
+router.get("/user/applications/:appId/status", IsUser, getApplicationStatus);
 
 router.patch("/admin/applications/:appId/status", IsAdmin, patchApplicationStatus);
 

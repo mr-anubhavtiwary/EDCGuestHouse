@@ -14,7 +14,8 @@ function RefreshHandler({ setIsAuthenticated }) {
 					location.pathname === "/login" ||
 					location.pathname === "/signup" ||
 					location.pathname === "/userDashboard" ||
-					location.pathname === "/application"
+					location.pathname === "/application" ||
+					location.pathname === "/book"
 				) {
 					navigate("/adminDashboard", { replace: false });
 				}

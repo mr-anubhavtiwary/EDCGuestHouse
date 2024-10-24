@@ -45,7 +45,7 @@ const Book = () => {
 	);
 	return (
 		<>
-			<Navbar user={loggedInUser} buttons={buttons}/>
+			<Navbar user={loggedInUser} buttons={buttons} />
 			<Box sx={{ padding: 3, backgroundColor: "#f4f6f9" }}>
 				{/* Hero Section */}
 				<Box
@@ -84,9 +84,9 @@ const Book = () => {
 						serene environment for a relaxing stay. Situated within
 						the beautiful campus of MNNIT Allahabad, it offers
 						modern amenities, spacious rooms, and a dining area.
-						Whether you're here for conferences, academic events, or
-						a leisurely visit, the guesthouse ensures a comfortable
-						experience with personalized services.
+						Whether you are here for conferences, academic events,
+						or a leisurely visit, the guesthouse ensures a
+						comfortable experience with personalized services.
 					</Typography>
 					<Typography variant='body1' paragraph>
 						We offer high-speed Wi-Fi, a dedicated lounge area, and
@@ -179,7 +179,7 @@ const Book = () => {
 					</Grid>
 				</Paper>
 			</Box>
-            <Footer />
+			<Footer />
 		</>
 	);
 };

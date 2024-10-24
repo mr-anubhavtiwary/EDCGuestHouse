@@ -51,7 +51,7 @@ export const AdminDashboard = () => {
 	}, [Navigate]);
 
 	const handleStatusChange = async (appId, newStatus) => {
-		console.log(appId);
+		// console.log(appId);
 		const token = localStorage.getItem("token");
 		const url = `http://localhost:8080/auth/admin/applications/${appId}/status`;
 
@@ -251,6 +251,10 @@ export const AdminDashboard = () => {
 										sx={{ marginTop: 2 }}
 									>
 										<Grid item xs={12} sm={4}>
+											<Typography>
+												<strong>No. of Rooms:</strong>{" "}
+												{app.numberOfRooms.toLocaleString()}
+											</Typography>
 											<Typography>
 												<strong>Rent Paid By:</strong>{" "}
 												{app.rentPaidBy}
