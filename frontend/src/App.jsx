@@ -10,6 +10,7 @@ import { useState } from "react";
 import Application from "./pages/Application";
 import AdminDashboard from "./pages/AdminDashboard";
 import UserDashboard from "./pages/UserDashboard";
+import Book from "./pages/Book";
 
 function App() {
 	const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -30,6 +31,7 @@ function App() {
 				<Route path='/home' element={<Home />} />
 				<Route path='/adminDashboard' element={<AdminDashboard />} />
 				<Route path='/userDashboard' element={<UserDashboard />} />
+				<Route path='/book' element={<Book />} />
 			</Routes>
 			<ToastContainer />
 		</div>

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import profilepic1 from "../assets/images/johndoe.png";
 import { AiFillStar } from "react-icons/ai";
 

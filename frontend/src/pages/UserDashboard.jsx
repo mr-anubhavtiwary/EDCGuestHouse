@@ -8,12 +8,14 @@ import {
 	Box,
 	Grid,
 	Divider,
+	Button,
 } from "@mui/material";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import { Navigate, useNavigate } from "react-router-dom";
 import Navbar from "./Navbar";
 import Footer from "./Footer";
 import { handleSuccess } from "../utils";
+import AddIcon from "@mui/icons-material/Add";
 
 export const UserDashboard = () => {
 	// State to store applications data
@@ -60,6 +62,17 @@ export const UserDashboard = () => {
 			navigate("/home");
 		}, 1000);
 	};
+
+	const handleBook = () => {
+		setTimeout(() => {
+			navigate("/book", {
+				state: {
+					loggedInUser,
+					// buttons,
+				},
+			});
+		}, 1000);
+	}
 	let buttons = (
 		<button className='primary-button' onClick={handleLogout}>
 			Logout
@@ -260,6 +273,14 @@ export const UserDashboard = () => {
 											</Typography>
 										</Grid>
 									</Grid>
+									{app.status === "approved"?<Button
+										size='large'
+										color='secondary'
+										startIcon={<AddIcon />}
+										onClick={handleBook}
+									>
+										Book
+									</Button>: ""}
 								</AccordionDetails>
 							</Accordion>
 						))

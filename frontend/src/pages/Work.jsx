@@ -1,5 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
-import mnnit2 from "../assets/images/mnnit2.png";
+import { useEffect, useRef, useState } from "react";
 import speech from "../assets/images/speech.png";
 import wifi from "../assets/images/wifi.png";
 import cutlery from "../assets/images/cutlery.png";

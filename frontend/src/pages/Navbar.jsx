@@ -32,12 +32,14 @@ function stringAvatar(name) {
 function Navbar({ user, buttons }) {
 	const navigate = useNavigate();
 	const handleProfile = () => {
-		const isAdmin = localStorage.getItem("isAdmin") === "true";
+		const isAdmin = localStorage.getItem("isAdmin");
+		console.log("isAdmin", typeof isAdmin);
 		setTimeout(function () {
-			if (isAdmin) {
+			if (isAdmin === "true") {
 				navigate("/adminDashboard");
+				console.log("admin");
 			} else {
-				navigate("/home");
+				navigate("/userDashboard");
 			}
 		}, 1000);
 	};
@@ -50,7 +52,7 @@ function Navbar({ user, buttons }) {
 				)}
 				{user}
 			</div>
-			< div className='navbar-links-container'>
+			<div className='navbar-links-container'>
 				<a href='/home'>Home</a>
 				<a href=''>About</a>
 				<a href=''>Contact</a>

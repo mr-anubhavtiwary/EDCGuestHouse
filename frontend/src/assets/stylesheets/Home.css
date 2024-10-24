@@ -230,6 +230,10 @@ nav {
 .footer-section-columns span {
 	margin: 0.25rem 0;
 	font-weight: 600;
+	display:flex;
+	/* justify-content: center; */
+	align-items: center;
+	gap:10px;
 	color: #4c4c4c;
 	cursor: pointer;
 	transition: color 0.3s ease;
