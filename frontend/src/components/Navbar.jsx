@@ -62,16 +62,16 @@ function Navbar({ user, buttons }) {
 				<a href='/home' style={{ color: "#302f2fec" }}>
 					Home
 				</a>
-				<a href='' style={{ color: "#302f2fec" }}>
+				<a href='/aboutPage' style={{ color: "#302f2fec" }}>
 					About
 				</a>
-				<a href='' style={{ color: "#302f2fec" }}>
+				<a href='/contact' style={{ color: "#302f2fec" }}>
 					Contact
 				</a>
-				<a href='' style={{ color: "#302f2fec" }}>
+				<a href='/gallaryPage' style={{ color: "#302f2fec" }}>
 					Gallary
 				</a>
-				<a href='' style={{ color: "#302f2fec" }}>
+				<a href='/diningMenu' style={{ color: "#302f2fec" }}>
 					Dining Menu
 				</a>
 				{buttons}

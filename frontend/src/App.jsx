@@ -12,6 +12,10 @@ import AdminDashboard from "./pages/AdminDashboard";
 import UserDashboard from "./pages/UserDashboard";
 import Book from "./pages/Book";
 import NotFound from "./pages/NotFound";
+import Contact from "./pages/Contact";
+import AboutPage from "./pages/AboutPage";
+import GallaryPage from "./pages/GallaryPage";
+import DiningMenu from "./pages/DiningMenu";
 
 function App() {
 	const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -31,6 +35,10 @@ function App() {
 				<Route path='/adminDashboard' element={<AdminDashboard />} />
 				<Route path='/userDashboard' element={<UserDashboard />} />
 				<Route path='/book' element={<Book />} />
+				<Route path='/contact' element={<Contact />} />
+				<Route path='/aboutPage' element={<AboutPage />} />
+				<Route path='/gallaryPage' element={<GallaryPage />} />
+				<Route path='/diningMenu' element={<DiningMenu />} />
 				{/* 404 Route */}
 				<Route path="*" element={<NotFound />} />
 			</Routes>
