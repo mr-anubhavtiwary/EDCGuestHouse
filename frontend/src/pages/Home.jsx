@@ -12,7 +12,7 @@ import About from "../components/About";
 import Work from "../components/Work";
 import Testimonial from "../components/Testimonial";
 import Footer from "../components/Footer";
-import Gallary from "../components/Gallary";
+import Gallery from "../components/Gallery";
 
 function Home() {
 	const [loggedInUser, setLoggedInUser] = useState("");
@@ -119,7 +119,7 @@ function Home() {
 				<About />
 				<Work />
 				<Testimonial />
-				<Gallary />
+				<Gallery />
 				<Footer />
 			</div>
 			{popup && (

@@ -14,9 +14,8 @@ import Book from "./pages/Book";
 import NotFound from "./pages/NotFound";
 import Contact from "./pages/Contact";
 import AboutPage from "./pages/AboutPage";
-import GallaryPage from "./pages/GallaryPage";
+import GalleryPage from "./pages/GallaryPage";
 import DiningMenu from "./pages/DiningMenu";
-import PaymentPage from "./components/PaymentPage";
 import ConfirmationPage from "./components/ConfirmationPage";
 
 function App() {
@@ -39,7 +38,7 @@ function App() {
 				<Route path='/book' element={<Book />} />
 				<Route path='/contact' element={<Contact />} />
 				<Route path='/aboutPage' element={<AboutPage />} />
-				<Route path='/gallaryPage' element={<GallaryPage />} />
+				<Route path='/galleryPage' element={<GalleryPage />} />
 				<Route path='/diningMenu' element={<DiningMenu />} />
 				<Route path="/confirmation" element={<ConfirmationPage />} />
 				{/* 404 Route */}

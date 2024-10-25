@@ -1,4 +1,4 @@
-import { Box, ImageList, ImageListItem, Typography } from "@mui/material";
+import { Box, ImageList, ImageListItem } from "@mui/material";
 import mnnit1 from "../assets/images/mnnit1.png";
 import mnnit2 from "../assets/images/mnnit2.png";
 import mnnit3 from "../assets/images/mnnit3.png";
@@ -6,7 +6,7 @@ import mnnit4 from "../assets/images/mnnit4.png";
 import room1 from "../assets/images/room1.png";
 import room2 from "../assets/images/room2.png";
 
-const Gallary = () => {
+const Gallery = () => {
 	const itemData = [
 		{ img: mnnit1, title: "Guesthouse 1" },
 		{ img: mnnit2, title: "Guesthouse 2" },
@@ -61,4 +61,4 @@ const Gallary = () => {
 	);
 };
 
-export default Gallary;
+export default Gallery;

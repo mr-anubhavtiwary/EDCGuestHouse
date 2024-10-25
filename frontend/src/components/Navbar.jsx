@@ -68,8 +68,8 @@ function Navbar({ user, buttons }) {
 				<a href='/contact' style={{ color: "#302f2fec" }}>
 					Contact
 				</a>
-				<a href='/gallaryPage' style={{ color: "#302f2fec" }}>
-					Gallary
+				<a href='/galleryPage' style={{ color: "#302f2fec" }}>
+					Gallery
 				</a>
 				<a href='/diningMenu' style={{ color: "#302f2fec" }}>
 					Dining Menu
