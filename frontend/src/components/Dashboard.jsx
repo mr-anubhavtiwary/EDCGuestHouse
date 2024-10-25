@@ -232,7 +232,7 @@ const Dashboard = ({ applications, handleChange }) => {
 									color='secondary'
 									startIcon={<AddIcon />}
 									onClick={() =>
-										handleChange(app._id, app.status)
+										handleChange(app, app._id, app.status)
 									}
 								>
 									Book

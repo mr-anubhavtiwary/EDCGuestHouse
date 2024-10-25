@@ -3,11 +3,15 @@ import mnnit1 from "../assets/images/mnnit1.png";
 import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
 import { handleSuccess } from "../utils";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import BannerBackground from "../assets/images/bookbanner.png";
 import Gallary from "../components/Gallary";
 
 const Book = () => {
+	const location = useLocation();
+    const { totalCost } = location.state || {};
+	// console.log("total Cost - ", totalCost);
+
 	const navigate = useNavigate();
 	const loggedInUser = localStorage.getItem("loggedInUser");
 	const handleLogout = () => {

@@ -28,7 +28,7 @@ export const UserDashboard = () => {
 				});
 
 				const data = await response.json();
-				console.log(data);
+				// console.log(data);
 				if (data && data.success) {
 					setApplications(data.data); // Store applications in state
 				} else {
@@ -53,7 +53,56 @@ export const UserDashboard = () => {
 		}, 500);
 	};
 
-	const handleBook = async (appId, appStatus) => {
+	// Calculation of total cost based on room tariff, food charges, and stay duration.
+	const calculateTotalCost = (app) => {
+		const days =
+			(new Date(app.checkOutDate) - new Date(app.checkInDate)) /
+			(1000 * 60 * 60 * 24);
+	
+		// Defining room rates and food charges by category
+		const rates = {
+			B: { single: 500, double: 700 },
+			C: { single: 900, double: 1000 },
+			D: { single: 1500, double: 2000 },
+		};
+
+		const foodRates = {
+			B: { breakfast: 75, lunch: 125, dinner: 125 },
+			C: { breakfast: 75, lunch: 125, dinner: 125 },
+			D: { breakfast: 150, lunch: 300, dinner: 300 },
+		};
+
+		// Determininng rates for category ('B', 'C', 'D')
+		const category = app.designation;
+
+		// Skipping cost calculation for Category A, where all charges are zero
+		if (category === "A") return 0;
+
+		// Calculating room cost
+		// const roomRate =
+		// 	app.occupancy === "single"
+		// 		? rates[category].single
+		// 		: rates[category].double;
+		const roomRate = app.accompanyingPersons.length * rates[category].single;
+
+		// Calculate food cost for each person per day
+		const foodCost =
+			app.accompanyingPersons.length *
+			(foodRates[category].breakfast +
+				foodRates[category].lunch +
+				foodRates[category].dinner);
+
+		const roomCost = roomRate + foodCost;
+		// console.log("days", days);
+		// console.log("food", foodCost);
+		// console.log("room", roomRate);
+		// console.log("room cost in a day", roomCost);
+
+		return roomCost * days;
+	};
+
+	const handleBook = async (app, appId, appStatus) => {
+		const totalCost = calculateTotalCost(app);
 		const token = localStorage.getItem("token");
 
 		const url = `http://localhost:8080/auth/user/applications/${appId}/status?status=${appStatus}`;
@@ -72,7 +121,7 @@ export const UserDashboard = () => {
 
 			if (data && data.success) {
 				setTimeout(() => {
-					navigate("/book");
+					navigate("/book", { state: { totalCost } });
 				}, 500);
 			} else {
 				console.error("Status not approved:", data.message);
