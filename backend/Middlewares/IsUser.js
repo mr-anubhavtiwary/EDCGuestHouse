@@ -28,12 +28,6 @@ const IsUser = async (req, res, next) => {
 			message: "Authorization token missing or invalid",
 		});
 	}
-
-	// if (!auth) {
-	// 	return res
-	// 		.status(403)
-	// 		.json({ message: "Unauthorised, JWT token is required" });
-	// }
 };
 
 module.exports = { IsUser };

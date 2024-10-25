@@ -12,8 +12,8 @@ import {
 } from "@mui/material";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import { Navigate, useNavigate } from "react-router-dom";
-import Navbar from "./Navbar";
-import Footer from "./Footer";
+import Navbar from "../components/Navbar";
+import Footer from "../components/Footer";
 import { handleSuccess } from "../utils";
 import AddIcon from "@mui/icons-material/Add";
 import BannerBackground from "../assets/images/aqua.png";

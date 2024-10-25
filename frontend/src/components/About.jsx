@@ -1,6 +1,5 @@
 // netstat -a -n -o
 // taskkill -f /pid 13056
-import React from "react";
 import AboutBackground from "../assets/images/about.png";
 import AboutBackgroundImage from "../assets/images/mnnit2.png";
 

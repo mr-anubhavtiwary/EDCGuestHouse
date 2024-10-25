@@ -5,7 +5,7 @@ import "./App.css";
 import Home from "./pages/Home";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/ReactToastify.css";
-import RefreshHandler from "./pages/RefreshHandler";
+import RefreshHandler from "./contexts/RefreshHandler";
 import { useState } from "react";
 import Application from "./pages/Application";
 import AdminDashboard from "./pages/AdminDashboard";

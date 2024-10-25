@@ -4,20 +4,19 @@ import { handleSuccess } from "../utils";
 import BannerBackground from "../assets/images/aqua4.png";
 import BannerImage from "../assets/images/banner.png";
 import "../assets/stylesheets/Home.css";
-import Navbar from "./Navbar";
+import Navbar from "../components/Navbar";
 import { FiArrowRight } from "react-icons/fi";
 import Login from "./Login";
 import Signup from "./Signup";
-import About from "./About";
-import Work from "./Work";
-import Testimonial from "./Testimonial";
-import Footer from "./Footer";
-import Gallary from "./Gallary";
+import About from "../components/About";
+import Work from "../components/Work";
+import Testimonial from "../components/Testimonial";
+import Footer from "../components/Footer";
+import Gallary from "../components/Gallary";
 
 function Home() {
 	const [loggedInUser, setLoggedInUser] = useState("");
 	const [popup, setPopup] = useState(null);
-	// const [products, setProducts] = useState("");
 
 	const navigate = useNavigate();
 	const handleLogout = () => {
@@ -109,7 +108,7 @@ function Home() {
 							className='secondary-button'
 							onClick={handleApplication}
 						>
-							Apply
+							Register
 							<FiArrowRight />{" "}
 						</button>
 					</div>

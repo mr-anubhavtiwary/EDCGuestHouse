@@ -3,8 +3,8 @@ import { handleError, handleSuccess } from "../utils";
 import { useNavigate, useLocation } from "react-router-dom";
 
 import "../assets/stylesheets/Application.css";
-import Footer from "./Footer";
-import Navbar from "./Navbar";
+import Footer from "../components/Footer";
+import Navbar from "../components/Navbar";
 
 function Application() {
 	const navigate = useNavigate();

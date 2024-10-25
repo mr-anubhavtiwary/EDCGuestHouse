@@ -1,11 +1,11 @@
 import { Typography, Box, Paper, Grid } from "@mui/material";
 import mnnit1 from "../assets/images/mnnit1.png";
-import Footer from "./Footer";
-import Navbar from "./Navbar";
+import Footer from "../components/Footer";
+import Navbar from "../components/Navbar";
 import { handleSuccess } from "../utils";
 import { useNavigate } from "react-router-dom";
 import BannerBackground from "../assets/images/bookbanner.png";
-import Gallary from "./Gallary";
+import Gallary from "../components/Gallary";
 
 const Book = () => {
 	const navigate = useNavigate();

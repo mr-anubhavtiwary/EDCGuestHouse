@@ -68,6 +68,12 @@ function Navbar({ user, buttons }) {
 				<a href='' style={{ color: "#302f2fec" }}>
 					Contact
 				</a>
+				<a href='' style={{ color: "#302f2fec" }}>
+					Gallary
+				</a>
+				<a href='' style={{ color: "#302f2fec" }}>
+					Dining Menu
+				</a>
 				{buttons}
 			</div>
 		</nav>
