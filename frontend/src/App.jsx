@@ -16,6 +16,8 @@ import Contact from "./pages/Contact";
 import AboutPage from "./pages/AboutPage";
 import GallaryPage from "./pages/GallaryPage";
 import DiningMenu from "./pages/DiningMenu";
+import PaymentPage from "./components/PaymentPage";
+import ConfirmationPage from "./components/ConfirmationPage";
 
 function App() {
 	const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -39,6 +41,8 @@ function App() {
 				<Route path='/aboutPage' element={<AboutPage />} />
 				<Route path='/gallaryPage' element={<GallaryPage />} />
 				<Route path='/diningMenu' element={<DiningMenu />} />
+				<Route path="/payment" element={<PaymentPage />} />
+				<Route path="/confirmation" element={<ConfirmationPage />} />
 				{/* 404 Route */}
 				<Route path="*" element={<NotFound />} />
 			</Routes>

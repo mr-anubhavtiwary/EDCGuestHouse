@@ -6,11 +6,12 @@ import { handleSuccess } from "../utils";
 import { useNavigate, useLocation } from "react-router-dom";
 import BannerBackground from "../assets/images/bookbanner.png";
 import Gallary from "../components/Gallary";
+import PaymentPage from "../components/PaymentPage";
 
 const Book = () => {
 	const location = useLocation();
-    const { totalCost } = location.state || {};
-	// console.log("total Cost - ", totalCost);
+	const { totalCost } = location.state || {};
+	console.log("total Cost - ", totalCost);
 
 	const navigate = useNavigate();
 	const loggedInUser = localStorage.getItem("loggedInUser");
@@ -23,6 +24,10 @@ const Book = () => {
 			navigate("/home");
 		}, 500);
 	};
+	// let totalAmount = totalCost;
+	// const handlePay = () => {
+	// 	navigate("/payment", { state: { totalAmount } });
+	// };
 	let buttons = (
 		<button className='primary-button' onClick={handleLogout}>
 			Logout
@@ -62,7 +67,7 @@ const Book = () => {
 							Welcome to MNNIT Guesthouse
 						</Typography>
 					</Box>
-
+					
 					{/* Guesthouse Description */}
 					<Paper elevation={3} sx={{ padding: 3, marginBottom: 5 }}>
 						<Typography variant='h4' gutterBottom>
@@ -87,6 +92,7 @@ const Book = () => {
 						</Typography>
 					</Paper>
 					{/* Gallary */}
+
 					<Gallary />
 
 					{/* Location or Facilities Section */}
@@ -131,6 +137,7 @@ const Book = () => {
 								</Typography>
 							</Grid>
 						</Grid>
+						<PaymentPage totalAmount={totalCost}/>
 					</Paper>
 				</Box>
 			</div>
