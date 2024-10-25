@@ -3,11 +3,10 @@ const Joi = require("joi");
 // Define the Joi schema
 const applicationSchema = Joi.object({
 	status: Joi.string().valid("approved", "pending", "rejected").messages({
-		"any.only": "Status must be applicant must be approved, pending or rejected",
+		"any.only": "Status must be approved, pending or rejected",
 	}),
+	email: Joi.string().email().required(),
 
-    email: Joi.string().email().required(),
-    
 	designation: Joi.string().valid("A", "B", "C", "D").required().messages({
 		"any.only": "Relation with applicant must be A, B, C, or D.",
 	}),
@@ -65,8 +64,8 @@ const applicationSchema = Joi.object({
 	accompanyingPersons: Joi.array()
 		.items(
 			Joi.object({
-				name: Joi.string().min(3).max(100).allow("").optional(),
-				relation: Joi.string().min(3).max(50).allow("").optional(),
+				name: Joi.string().min(3).max(100).allow(""),
+				relation: Joi.string().min(3).max(50).allow(""),
 			})
 		)
 		.max(3)
@@ -83,10 +82,14 @@ const applicationSchema = Joi.object({
 		"any.required": "Check-in date is required.",
 	}),
 
-	checkOutDate: Joi.date().required().messages({
-		"date.base": "Please provide a valid check-out date.",
-		"any.required": "Check-out date is required.",
-	}),
+	checkOutDate: Joi.date()
+		.greater(Joi.ref("checkInDate"))
+		.required()
+		.messages({
+			"date.base": "Please provide a valid check-out date.",
+			"any.required": "Check-out date is required.",
+			"date.greater": "Check-out date must be after check-in date.",
+		}),
 
 	numberOfRooms: Joi.number().integer().min(1).required().messages({
 		"number.base": "Number of rooms must be a number.",
@@ -103,14 +106,18 @@ const applicationSchema = Joi.object({
 
 // Validation example
 const applicationValidation = (req, res, next) => {
-    // console.log(formData);
+	// console.log(formData);
 	const { error } = applicationSchema.validate(req.body, {
 		abortEarly: false,
 	});
 	if (error) {
-        // console.log(error);
-        return res.status(400).json({ message: error.message, error });
-		// return error.details.map((err) => err.message); // Returns an array of validation error messages
+		// console.log(error);
+		return res
+			.status(400)
+			.json({
+				message: "Validation Error",
+				errors: error.details.map((err) => err.message),
+			});
 	}
 	next(); // No errors, validation successful
 };

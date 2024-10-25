@@ -121,7 +121,7 @@ export const UserDashboard = () => {
 
 			if (data && data.success) {
 				setTimeout(() => {
-					navigate("/book", { state: { totalCost } });
+					navigate("/book", { state: { totalCost, appId } });
 				}, 500);
 			} else {
 				console.error("Status not approved:", data.message);

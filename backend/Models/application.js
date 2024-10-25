@@ -35,6 +35,11 @@ const ApplicationSchema = new mongoose.Schema(
 			type: mongoose.Schema.Types.ObjectId,
 			ref: "users",
 		},
+		referenceId: {
+			type: String,
+			unique: true, // Ensures reference ID is unique across applications
+			sparse: true, // Allows `null` values for unpaid applications, if required
+		},
 		designation: {
 			type: String,
 			enum: ["A", "B", "C", "D"], // Director, head/section in charge, etc.

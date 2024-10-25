@@ -10,9 +10,9 @@ import PaymentPage from "../components/PaymentPage";
 
 const Book = () => {
 	const location = useLocation();
-	const { totalCost } = location.state || {};
+	const { totalCost, appId } = location.state || {};
 	console.log("total Cost - ", totalCost);
-
+	console.log("appId - ", appId);
 	const navigate = useNavigate();
 	const loggedInUser = localStorage.getItem("loggedInUser");
 	const handleLogout = () => {
@@ -67,7 +67,7 @@ const Book = () => {
 							Welcome to MNNIT Guesthouse
 						</Typography>
 					</Box>
-					
+
 					{/* Guesthouse Description */}
 					<Paper elevation={3} sx={{ padding: 3, marginBottom: 5 }}>
 						<Typography variant='h4' gutterBottom>
@@ -137,7 +137,7 @@ const Book = () => {
 								</Typography>
 							</Grid>
 						</Grid>
-						<PaymentPage totalAmount={totalCost}/>
+						<PaymentPage totalAmount={totalCost} appId={appId} />
 					</Paper>
 				</Box>
 			</div>

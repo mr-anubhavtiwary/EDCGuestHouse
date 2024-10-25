@@ -41,7 +41,6 @@ function App() {
 				<Route path='/aboutPage' element={<AboutPage />} />
 				<Route path='/gallaryPage' element={<GallaryPage />} />
 				<Route path='/diningMenu' element={<DiningMenu />} />
-				<Route path="/payment" element={<PaymentPage />} />
 				<Route path="/confirmation" element={<ConfirmationPage />} />
 				{/* 404 Route */}
 				<Route path="*" element={<NotFound />} />

@@ -16,9 +16,7 @@ const {
 } = require("../Controllers/AdminController");
 const { IsAdmin } = require("../Middlewares/IsAdmin");
 const { IsUser } = require("../Middlewares/IsUser");
-const { payment } = require("../Controllers/Payment");
-
-
+const { payment, addApplicationReferenceId } = require("../Controllers/Payment");
 
 const router = require("express").Router();
 
@@ -36,6 +34,12 @@ router.patch(
 	"/admin/applications/:appId/status",
 	IsAdmin,
 	patchApplicationStatus
+);
+
+router.put(
+	"/admin/applications/:appId/referenceid",
+	IsUser,
+	addApplicationReferenceId
 );
 
 router.post("/signup", signupValidation, signup);
