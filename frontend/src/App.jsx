@@ -1,7 +1,5 @@
 import { Navigate, Route, Routes } from "react-router-dom";
 import "./App.css";
-// import Login from "./pages/Login";
-// import Signup from "./pages/Signup";
 import Home from "./pages/Home";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/ReactToastify.css";
@@ -20,27 +18,53 @@ import ConfirmationPage from "./components/ConfirmationPage";
 
 function App() {
 	const [isAuthenticated, setIsAuthenticated] = useState(false);
-	const PrivateRoutes = ({ element }) => {
-		return isAuthenticated ? element : <Navigate to='/login' />;
+	const [isAdmin, setIsAdmin] = useState(false);
+
+	// Wrapper to restrict routes based on user authentication and role
+	const PrivateRoutes = ({ element, adminOnly, userOnly }) => {
+		if (!isAuthenticated) return <Navigate to="/login" />;
+		if (adminOnly && !isAdmin) return <Navigate to="/" />;
+		if (userOnly && isAdmin) return <Navigate to="/" />;
+		return element;
 	};
+
 	return (
-		<div className='App'>
-			<RefreshHandler setIsAuthenticated={setIsAuthenticated} />
+		<div className="App">
+			<RefreshHandler setIsAuthenticated={setIsAuthenticated} setIsAdmin={setIsAdmin} />
 			<Routes>
-				<Route path='/' element={<Navigate to='/home' />} />
+				<Route path="/" element={<Navigate to="/home" />} />
+				<Route path="/home" element={<Home />} />
+
+				{/* User Routes */}
 				<Route
-					path='/application'
-					element={<PrivateRoutes element={<Application />} />}
+					path="/application"
+					element={<PrivateRoutes element={<Application />} userOnly  />}
 				/>
-				<Route path='/home' element={<Home />} />
-				<Route path='/adminDashboard' element={<AdminDashboard />} />
-				<Route path='/userDashboard' element={<UserDashboard />} />
-				<Route path='/book' element={<Book />} />
-				<Route path='/contact' element={<Contact />} />
-				<Route path='/aboutPage' element={<AboutPage />} />
-				<Route path='/galleryPage' element={<GalleryPage />} />
-				<Route path='/diningMenu' element={<DiningMenu />} />
-				<Route path="/confirmation" element={<ConfirmationPage />} />
+				<Route
+					path="/userDashboard"
+					element={<PrivateRoutes element={<UserDashboard />} userOnly />}
+				/>
+				<Route
+					path="/book"
+					element={<PrivateRoutes element={<Book />} userOnly />}
+				/>
+				<Route
+					path="/confirmation"
+					element={<PrivateRoutes element={<ConfirmationPage />} userOnly  />}
+				/>
+
+				{/* Admin Routes */}
+				<Route
+					path="/adminDashboard"
+					element={<PrivateRoutes element={<AdminDashboard />} adminOnly />}
+				/>
+
+				{/* Public Routes */}
+				<Route path="/contact" element={<Contact />} />
+				<Route path="/aboutPage" element={<AboutPage />} />
+				<Route path="/galleryPage" element={<GalleryPage />} />
+				<Route path="/diningMenu" element={<DiningMenu />} />
+
 				{/* 404 Route */}
 				<Route path="*" element={<NotFound />} />
 			</Routes>

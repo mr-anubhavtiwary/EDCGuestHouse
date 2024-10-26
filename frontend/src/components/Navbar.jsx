@@ -2,8 +2,7 @@ import { useNavigate } from "react-router-dom";
 import "../assets/stylesheets/Home.css";
 import Avatar from "@mui/material/Avatar";
 
-const isAdmin = localStorage.getItem("isAdmin") === "true";
-function stringToColor(string) {
+function stringToColor(string, isAdmin) {
 	if (!string) return "";
 	if (isAdmin) return "#eb4545ed";
 	let hash = 0;
@@ -22,10 +21,10 @@ function stringToColor(string) {
 	return color;
 }
 
-function stringAvatar(name) {
+function stringAvatar(name, isAdmin) {
 	return {
 		sx: {
-			bgcolor: stringToColor(name),
+			bgcolor: stringToColor(name, isAdmin),
 		},
 		children: `${name.split(" ")[0][0]}`,
 	};
@@ -33,6 +32,7 @@ function stringAvatar(name) {
 
 function Navbar({ user, buttons }) {
 	const navigate = useNavigate();
+	const isAdmin = localStorage.getItem("isAdmin") === "true";
 
 	const handleProfile = () => {
 		setTimeout(function () {
@@ -47,33 +47,37 @@ function Navbar({ user, buttons }) {
 			}
 		}, 1000);
 	};
-	const nameColor = stringToColor(user);
+	const nameColor = stringToColor(user, isAdmin);
 	return (
 		<nav>
 			<div className='navbar-username'>
 				{user && (
-					<Avatar {...stringAvatar(user)} onClick={handleProfile} />
+					<Avatar {...stringAvatar(user, isAdmin)} onClick={handleProfile} />
 				)}
 				<div style={{ color: `${isAdmin ? "#eb4545ed" : nameColor}` }}>
 					{user}
 				</div>
 			</div>
 			<div className='navbar-links-container'>
-				<a href='/home' style={{ color: "#302f2fec" }}>
-					Home
-				</a>
-				<a href='/aboutPage' style={{ color: "#302f2fec" }}>
-					About
-				</a>
-				<a href='/contact' style={{ color: "#302f2fec" }}>
-					Contact
-				</a>
-				<a href='/galleryPage' style={{ color: "#302f2fec" }}>
-					Gallery
-				</a>
-				<a href='/diningMenu' style={{ color: "#302f2fec" }}>
-					Dining Menu
-				</a>
+				{!isAdmin && (
+					<div>
+						<a href='/home' style={{ color: "#302f2fec" }}>
+							Home
+						</a>
+						<a href='/aboutPage' style={{ color: "#302f2fec" }}>
+							About
+						</a>
+						<a href='/contact' style={{ color: "#302f2fec" }}>
+							Contact
+						</a>
+						<a href='/galleryPage' style={{ color: "#302f2fec" }}>
+							Gallery
+						</a>
+						<a href='/diningMenu' style={{ color: "#302f2fec" }}>
+							Dining Menu
+						</a>
+					</div>
+				)}
 				{buttons}
 			</div>
 		</nav>

@@ -76,7 +76,7 @@ export const UserDashboard = () => {
 		const category = app.designation;
 
 		// Skipping cost calculation for Category A, where all charges are zero
-		if (category === "A") return 0;
+		if (category === "A") return 1;
 
 		// Calculating room cost
 		// const roomRate =

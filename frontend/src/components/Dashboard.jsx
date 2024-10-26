@@ -33,12 +33,10 @@ const Dashboard = ({ applications, handleChange }) => {
 				boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.1)",
 			}}
 		>
-			{!isAdmin ? (
-				<Tabs value={selectedTab} onChange={handleTabChange} centered>
-					<Tab label='Applications' />
-					<Tab label='Status' />
-				</Tabs>
-			) : null}
+			<Tabs value={selectedTab} onChange={handleTabChange} centered>
+				<Tab label='Applications' />
+				<Tab label='Status' />
+			</Tabs>
 
 			{/* Applications Tab Content */}
 			{selectedTab === 0 && (
@@ -60,7 +58,8 @@ const Dashboard = ({ applications, handleChange }) => {
 					{applications.length > 0 ? (
 						applications.map(
 							(app) =>
-								!app.referenceId && (
+								!app.referenceId &&
+								app.status != "rejected" && (
 									<Accordion
 										key={app._id}
 										sx={{ marginBottom: 2 }}

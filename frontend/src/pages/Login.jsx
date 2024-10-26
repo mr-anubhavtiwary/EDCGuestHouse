@@ -32,7 +32,7 @@ function Login({ setPopup }) {
 			return handleError("All fields are required");
 		}
 		try {
-			const url = `${import.meta.env.VITE_HOST}auth/${
+			const url = `${import.meta.env.VITE_HOST}/auth/${
 				admin ? "adminLogin" : "login"
 			}`;
 			const response = await fetch(url, {

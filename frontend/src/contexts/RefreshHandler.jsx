@@ -1,36 +1,36 @@
 import { useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 
-function RefreshHandler({ setIsAuthenticated }) {
+function RefreshHandler({ setIsAuthenticated, setIsAdmin }) {
 	const location = useLocation();
 	const navigate = useNavigate();
 
 	useEffect(() => {
-		if (localStorage.getItem("token")) {
+		const token = localStorage.getItem("token");
+		const isAdmin = JSON.parse(localStorage.getItem("isAdmin")) === true;
+
+		if (token) {
 			setIsAuthenticated(true);
-			if (localStorage.getItem("isAdmin") === "true") {
-				if (
-					location.pathname === "/" ||
-					location.pathname === "/login" ||
-					location.pathname === "/signup" ||
-					location.pathname === "/userDashboard" ||
-					location.pathname === "/application" ||
-					location.pathname === "/book"
-				) {
-					navigate("/adminDashboard", { replace: false });
-				}
-			} else {
-				if (
-					location.pathname === "/" ||
-					location.pathname === "/login" ||
-					location.pathname === "/signup" ||
-					location.pathname === "/adminDashboard"
-				) {
-					navigate("/home", { replace: false });
-				}
+			setIsAdmin(isAdmin);
+
+			// Role-based redirection with conditional check to prevent loops
+			if (isAdmin && location.pathname !== "/adminDashboard") {
+				navigate("/adminDashboard", { replace: true });
+			} else if (!isAdmin && location.pathname === "/adminDashboard") {
+				navigate("/userDashboard", { replace: true });
+			}
+		} else {
+			setIsAuthenticated(false);
+			setIsAdmin(false);
+			if (
+				location.pathname !== "/login" &&
+				location.pathname !== "/signup"
+			) {
+				navigate("/home", { replace: true });
 			}
 		}
-	}, [location, navigate, setIsAuthenticated]);
+	}, [location.pathname, navigate, setIsAuthenticated, setIsAdmin]);
+
 	return null;
 }
 
