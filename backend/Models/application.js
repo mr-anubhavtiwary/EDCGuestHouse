@@ -20,12 +20,19 @@ const AccompanyingPersonSchema = new mongoose.Schema(
 // Define the application schema
 const ApplicationSchema = new mongoose.Schema(
 	{
-		// applicantName: {
-		// 	type: String,
-		// 	trim: true,
-		// 	minlength: 3,
-		// 	maxlength: 100,
-		// },
+		name: {
+			type: String,
+			trim: true,
+			minlength: 3,
+			maxlength: 100,
+		},
+		email: {
+			type: String,
+			required: true,
+			trim: true,
+			lowercase: true,
+			match: /.+\@.+\..+/, // Valid email format
+		},
 		status: {
 			type: String,
 			enum: ["approved", "pending", "rejected"],

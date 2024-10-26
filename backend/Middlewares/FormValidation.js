@@ -5,6 +5,11 @@ const applicationSchema = Joi.object({
 	status: Joi.string().valid("approved", "pending", "rejected").messages({
 		"any.only": "Status must be approved, pending or rejected",
 	}),
+	name: Joi.string().min(3).max(100).required().messages({
+		"string.empty": "name is required.",
+		"string.min": "name must be at least 3 characters long.",
+	}),
+
 	email: Joi.string().email().required(),
 
 	designation: Joi.string().valid("A", "B", "C", "D").required().messages({
@@ -106,18 +111,16 @@ const applicationSchema = Joi.object({
 
 // Validation example
 const applicationValidation = (req, res, next) => {
-	// console.log(formData);
+	// console.log(req.body);
 	const { error } = applicationSchema.validate(req.body, {
 		abortEarly: false,
 	});
 	if (error) {
 		// console.log(error);
-		return res
-			.status(400)
-			.json({
-				message: "Validation Error",
-				errors: error.details.map((err) => err.message),
-			});
+		return res.status(400).json({
+			message: "Validation Error",
+			errors: error.details.map((err) => err.message),
+		});
 	}
 	next(); // No errors, validation successful
 };

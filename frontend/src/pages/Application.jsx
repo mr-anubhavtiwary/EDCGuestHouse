@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { handleError, handleSuccess } from "../utils";
 import { useNavigate, useLocation } from "react-router-dom";
 
@@ -13,6 +13,8 @@ function Application() {
 	const [termsAccepted, setTermsAccepted] = useState(false);
 
 	const [formData, setFormData] = useState({
+		name: "",
+		email: "",
 		designation: "A",
 		employeeCode: "",
 		applicantAddress: "",
@@ -29,6 +31,14 @@ function Application() {
 		purposeOfStay: "Personal",
 		accompanyingPersons: [{ name: "", relation: "" }],
 	});
+
+	useEffect(() => {
+		setFormData((prevData) => ({
+			...prevData,
+			name: loggedInUser || prevData.name,
+			email: loggedInUserEmail || prevData.email,
+		}));
+	}, [loggedInUser, loggedInUserEmail]);
 
 	const handleChange = (e) => {
 		const { name, value } = e.target;
@@ -88,7 +98,7 @@ function Application() {
 			if (success) {
 				handleSuccess(message);
 				setTimeout(() => {
-					// navigate("/home");
+					navigate("/home");
 				}, 500);
 			} else {
 				handleError(message || error.details[0].message);
@@ -114,7 +124,7 @@ function Application() {
 	);
 	return (
 		<div className='application-container'>
-			<Navbar user={loggedInUser} buttons={buttons}/>
+			<Navbar user={loggedInUser} buttons={buttons} />
 			<form className='application-form' onSubmit={handleSubmit}>
 				<h2>Room Allotment Application</h2>
 

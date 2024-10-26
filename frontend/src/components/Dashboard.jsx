@@ -60,8 +60,7 @@ const Dashboard = ({ applications, handleChange }) => {
 					{applications.length > 0 ? (
 						applications.map(
 							(app) =>
-								!app.referenceId &&
-								app.status !== "rejected" && (
+								!app.referenceId && (
 									<Accordion
 										key={app._id}
 										sx={{ marginBottom: 2 }}

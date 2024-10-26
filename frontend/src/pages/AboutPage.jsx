@@ -64,7 +64,7 @@ const AboutPage = () => {
 								</Typography>
 								<Typography variant="body1" sx={{ mb: 2, color: "#555" }}>
 									To ensure every guest’s stay is convenient and comfortable, whether
-									you're here for an academic collaboration, a meeting, or to visit
+									you are here for an academic collaboration, a meeting, or to visit
 									a student.
 								</Typography>
 							</Box>

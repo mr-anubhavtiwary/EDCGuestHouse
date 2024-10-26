@@ -26,10 +26,14 @@ const getAdminApplications = async (req, res) => {
 
 // Set up your Nodemailer transporter
 const transporter = nodemailer.createTransport({
-	service: "gmail", // Use your email service, like 'gmail', 'hotmail', etc.
+	service: "gmail",
 	auth: {
-		user: process.env.EMAIL_USER, // Your email
-		pass: process.env.EMAIL_PASS, // Your email password or app password
+		type: "OAuth2",
+		user: process.env.EMAIL_USER,
+		pass: process.env.EMAIL_PASS,
+		clientId: process.env.OAUTH_CLIENT_ID,
+		clientSecret: process.env.OAUTH_CLIENT_SECRET,
+		refreshToken: process.env.OAUTH_REFRESH_TOKEN,
 	},
 });
 
@@ -68,8 +72,12 @@ const patchApplicationStatus = async (req, res) => {
 				.json({ success: false, message: "Application not found" });
 		}
 
+		// const { email } = updatedApplication;
+		// const email = "h6676536@gmail.com";
+		// console.log("", email);
+		// console.log("", name);
 		// if (status === "approved") {
-		// 	await sendApprovalEmail(application.email, appId); // Ensure application.userEmail exists
+		// 	await sendApprovalEmail(email, appId); // Ensure application.userEmail exists
 		// }
 
 		// Send back the updated application data

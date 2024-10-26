@@ -1,4 +1,3 @@
-import React from "react";
 import { Typography, Box, Card, CardContent, Grid } from "@mui/material";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
