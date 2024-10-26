@@ -1,6 +1,9 @@
 const AdminModel = require("../Models/admin");
 const ApplicationModel = require("../Models/application");
 
+// Import Nodemailer
+const nodemailer = require("nodemailer");
+
 const getAdminApplications = async (req, res) => {
 	try {
 		const adminId = req.adminId;
@@ -21,6 +24,32 @@ const getAdminApplications = async (req, res) => {
 	}
 };
 
+// Set up your Nodemailer transporter
+const transporter = nodemailer.createTransport({
+	service: "gmail", // Use your email service, like 'gmail', 'hotmail', etc.
+	auth: {
+		user: process.env.EMAIL_USER, // Your email
+		pass: process.env.EMAIL_PASS, // Your email password or app password
+	},
+});
+
+// Function to send an email
+const sendApprovalEmail = async (userEmail, applicationId) => {
+	try {
+		const mailOptions = {
+			from: process.env.EMAIL_USER,
+			to: userEmail,
+			subject: "Your Application Status",
+			text: `Your application with ID: ${applicationId} has been approved!`,
+		};
+
+		await transporter.sendMail(mailOptions);
+		console.log("Approval email sent to", userEmail);
+	} catch (error) {
+		console.error("Error sending email:", error);
+	}
+};
+
 const patchApplicationStatus = async (req, res) => {
 	const { appId } = req.params; // Extract the application ID from the request parameters
 	const { status } = req.body; // Extract the new status from the request body
@@ -38,6 +67,10 @@ const patchApplicationStatus = async (req, res) => {
 				.status(404)
 				.json({ success: false, message: "Application not found" });
 		}
+
+		// if (status === "approved") {
+		// 	await sendApprovalEmail(application.email, appId); // Ensure application.userEmail exists
+		// }
 
 		// Send back the updated application data
 		return res

@@ -5,7 +5,7 @@ import Navbar from "../components/Navbar";
 import { handleSuccess } from "../utils";
 import { useNavigate, useLocation } from "react-router-dom";
 import BannerBackground from "../assets/images/bookbanner.png";
-import Gallary from "../components/Gallary";
+import Gallery from "../components/Gallery";
 import PaymentPage from "../components/PaymentPage";
 
 const Book = () => {
@@ -93,7 +93,7 @@ const Book = () => {
 					</Paper>
 					{/* Gallary */}
 
-					<Gallary />
+					<Gallery />
 
 					{/* Location or Facilities Section */}
 					<Paper

@@ -14,7 +14,7 @@ import Book from "./pages/Book";
 import NotFound from "./pages/NotFound";
 import Contact from "./pages/Contact";
 import AboutPage from "./pages/AboutPage";
-import GalleryPage from "./pages/GallaryPage";
+import GalleryPage from "./pages/GalleryPage";
 import DiningMenu from "./pages/DiningMenu";
 import ConfirmationPage from "./components/ConfirmationPage";
 
