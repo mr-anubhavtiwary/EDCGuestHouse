@@ -30,7 +30,7 @@ function Signup({ setPopup }) {
 			return handleError("All fields are required");
 		}
 		try {
-			const url = "http://localhost:8080/auth/signup";
+			const url = `${import.meta.env.VITE_HOST}/auth/signup`;
 			const response = await fetch(url, {
 				method: "POST",
 				headers: {

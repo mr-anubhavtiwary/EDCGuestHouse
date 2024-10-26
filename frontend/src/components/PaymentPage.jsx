@@ -28,7 +28,7 @@ const CheckoutForm = ({ totalAmount, appId }) => {
 		const updateRef = async () => {
 			// console.log(appId);
 			const token = localStorage.getItem("token");
-			const url = `http://localhost:8080/auth/admin/applications/${appId}/referenceid`;
+			const url = `${import.meta.env.VITE_HOST}/auth/admin/applications/${appId}/referenceid`;
 			try {
 				const response = await fetch(url, {
 					method: "PUT",
@@ -55,7 +55,7 @@ const CheckoutForm = ({ totalAmount, appId }) => {
 			// Create a payment intent on the server
 
 			const url =
-				"http://localhost:8080/auth/payments/create-payment-intent";
+				`${import.meta.env.VITE_HOST}/auth/payments/create-payment-intent`;
 			const response = await fetch(url, {
 				method: "POST",
 				headers: {

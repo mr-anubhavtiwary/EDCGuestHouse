@@ -81,7 +81,7 @@ function Application() {
 		}
 
 		try {
-			const url = "http://localhost:8080/auth/application";
+			const url = `${import.meta.env.VITE_HOST}/auth/application`;
 			const response = await fetch(url, {
 				method: "POST",
 				headers: {

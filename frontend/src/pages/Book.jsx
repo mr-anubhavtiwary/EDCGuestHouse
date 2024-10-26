@@ -24,10 +24,7 @@ const Book = () => {
 			navigate("/home");
 		}, 500);
 	};
-	// let totalAmount = totalCost;
-	// const handlePay = () => {
-	// 	navigate("/payment", { state: { totalAmount } });
-	// };
+
 	let buttons = (
 		<button className='primary-button' onClick={handleLogout}>
 			Logout

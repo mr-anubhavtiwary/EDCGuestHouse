@@ -16,7 +16,7 @@ export const UserDashboard = () => {
 	useEffect(() => {
 		const fetchData = async () => {
 			const token = localStorage.getItem("token");
-			const url = "http://localhost:8080/auth/user/applications";
+			const url = `${import.meta.env.VITE_HOST}/auth/user/applications`;
 
 			try {
 				const response = await fetch(url, {
@@ -105,7 +105,7 @@ export const UserDashboard = () => {
 		const totalCost = calculateTotalCost(app);
 		const token = localStorage.getItem("token");
 
-		const url = `http://localhost:8080/auth/user/applications/${appId}/status?status=${appStatus}`;
+		const url = `${import.meta.env.VITE_HOST}/auth/user/applications/${appId}/status?status=${appStatus}`;
 
 		try {
 			const response = await fetch(url, {

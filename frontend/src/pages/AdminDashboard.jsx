@@ -15,7 +15,7 @@ export const AdminDashboard = () => {
 	useEffect(() => {
 		const fetchData = async () => {
 			const token = localStorage.getItem("token");
-			const url = "http://localhost:8080/auth/admin/applications";
+			const url = `${import.meta.env.VITE_HOST}/auth/admin/applications`;
 
 			try {
 				const response = await fetch(url, {
@@ -44,7 +44,7 @@ export const AdminDashboard = () => {
 	const handleStatusChange = async (appId, newStatus) => {
 		// console.log(appId);
 		const token = localStorage.getItem("token");
-		const url = `http://localhost:8080/auth/admin/applications/${appId}/status`;
+		const url = `${import.meta.env.VITE_HOST}/auth/admin/applications/${appId}/status`;
 
 		try {
 			const response = await fetch(url, {
