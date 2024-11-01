@@ -8,29 +8,28 @@
 
 This project is deployed on Render at
 
-```
-edcguesthouse.onrender.com
-```
+
+[edcguesthouse.onrender.com](edcguesthouse.onrender.com)
 
 # Figma Design Landing Page
-```
-https://www.figma.com/proto/eqKWwjQ7VNvEPiSFx9tX5V/EDCGH?node-id=0-1&t=Eh7eq5XgI9gAGzpQ-1
-```
+
+[figma.com](https://www.figma.com/proto/eqKWwjQ7VNvEPiSFx9tX5V/EDCGH?node-id=0-1&t=Eh7eq5XgI9gAGzpQ-1)
+
 A project for digitalizing the process of GuestHouse booking in MNNIT Allahabad college.
 
 # Features:
 
-    1. Login
-    2. Signup
-    3. Homepage
-    4. Applications
-    5. My Bookings
-    6. Booking
-    7. User Dashboard
-    8. Admin
-    9. Admin Dashboard
+    * Login
+    * Signup
+    * Homepage
+    * Applications
+    * My Bookings
+    * Booking
+    * User Dashboard
+    * Admin
+    * Admin Dashboard
 
-# Screenshots
+# Setup
 
 1. **Clone the repository**:
 
@@ -57,9 +56,9 @@ A project for digitalizing the process of GuestHouse booking in MNNIT Allahabad 
     npm start
     ```
 
-3. **Environment Setup**
+# Environment Setup
 
-    1. Backend Environment variables
+1. Backend Environment variables
     ```
     PORT=<Port no>
     MONGO_URI=<mongo connection url>
@@ -72,13 +71,13 @@ A project for digitalizing the process of GuestHouse booking in MNNIT Allahabad 
     OAUTH_REFRESH_TOKEN=<oauth2.0 refresh token>
 
     ```
-    2. Frontend Environment variables
+2. Frontend Environment variables
     ```
     VITE_STRIPE_PUB_KEY=<stripe public key>
     VITE_HOST=<localhost>
     ```
 
-4. **contact**
+# contact
     Email: mr.shivamtiwary@gmail.com
     Github: https://github.com/mr-anubhavtiwary
 
